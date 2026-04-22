@@ -24,7 +24,7 @@ Using Burp Intruder, the last octet of the IP address was fuzzed from 1 to 254 t
 One of the requests returned a valid response from an internal administrative interface.
 This allowed access to the admin panel, where the user "carlos" was deleted to complete the lab.
 
-The objetive of the lab was successfully achieved.
+The objective of the lab was successfully achieved.
 
 ## 🧠 Key Takeaways
 
@@ -32,6 +32,12 @@ The objetive of the lab was successfully achieved.
 - Internal network enumeration is possible through SSRF
 - User-controlled parameters that trigger server-side requests are dangerous
 - Burp Intruder can be used to automate internal host discovery
+
+---
+
+## Impact
+
+In a real-world scenario, this SSRF vulnerability could allow an attacker to access internal services that are not exposed publicly, including administrative interfaces or sensitive internal endpoints. Depending on the environment, SSRF may also be abused to interact with cloud metadata services, enumerate internal infrastructure, or pivot into deeper parts of the network.
 
 ---
 
