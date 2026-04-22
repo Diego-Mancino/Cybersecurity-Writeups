@@ -26,26 +26,57 @@ This allowed access to the admin panel, where the user "carlos" was deleted to c
 
 The objetive of the lab was successfully achieved.
 
+## 🧠 Key Takeaways
+
+- SSRF vulnerabilities can be used to access internal systems
+- Internal network enumeration is possible through SSRF
+- User-controlled parameters that trigger server-side requests are dangerous
+- Burp Intruder can be used to automate internal host discovery
+
+---
+
+## 🛡️ Mitigation
+
+- Validate and sanitize user input
+- Restrict server-side requests to trusted destinations
+- Implement allowlists for allowed resources
+- Block access to internal IP ranges (e.g., 127.0.0.1, 192.168.x.x)
+
+---
+
 
 ## 📸 Screenshots
 
 ### Initial Page
+
 ![Initial](images/initial-page.png)
 
+
 ### Product Page
+
 ![Product](images/product-page.png)
 
+
 ### Intercepted Request
+
 ![Intercept](images/intercept-request.png)
 
+
 ### Intruder Configuration
+
 ![Intruder Config](images/intruder-config.png)
 
+
 ### Intruder Results
+
 ![Intruder Results](images/intruder-results.png)
 
+
 ### Repeater Response
+
 ![Repeater](images/repeater-response.png)
 
+
 ### Lab Solved
+
 ![Solved](images/lab-solved.png)
