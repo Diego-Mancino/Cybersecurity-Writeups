@@ -25,3 +25,27 @@ One of the requests returned a valid response from an internal administrative in
 This allowed access to the admin panel, where the user "carlos" was deleted to complete the lab.
 
 The objetive of the lab was successfully achieved.
+
+
+## 📸 Screenshots
+
+### Initial Page
+![Initial](images/initial-page.png)
+
+### Product Page
+![Product](images/product-page.png)
+
+### Intercepted Request
+![Intercept](images/intercept-request.png)
+
+### Intruder Configuration
+![Intruder Config](images/intruder-config.png)
+
+### Intruder Results
+![Intruder Results](images/intruder-results.png)
+
+### Repeater Response
+![Repeater](images/repeater-response.png)
+
+### Lab Solved
+![Solved](images/lab-solved.png)
