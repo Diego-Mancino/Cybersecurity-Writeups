@@ -35,9 +35,9 @@ The objective of the lab was successfully achieved.
 
 ---
 
-## Impact
+## ⚠️ Impact
 
-In a real-world scenario, this SSRF vulnerability could allow an attacker to access internal services that are not exposed publicly, including administrative interfaces or sensitive internal endpoints. Depending on the environment, SSRF may also be abused to interact with cloud metadata services, enumerate internal infrastructure, or pivot into deeper parts of the network.
+In a real-world scenario, this vulnerability could allow an attacker to access internal services that are not publicly exposed, including administrative panels or internal APIs. In certain environments, SSRF may also be leveraged to interact with cloud metadata services, potentially leading to credential exposure or enabling further lateral movement within the infrastructure.
 
 ---
 
@@ -86,3 +86,5 @@ In a real-world scenario, this SSRF vulnerability could allow an attacker to acc
 ### Lab Solved
 
 ![Solved](images/lab-solved.png)
+
+---
