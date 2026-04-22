@@ -19,6 +19,8 @@ By intercepting the request using Burp Suite, it was observed that the applicati
 The 'stockApi' parameter was modified to target internal IP addresses.
 Using Burp Intruder, the last octet of the IP address was fuzzed from 1 to 254 to identify internal hosts.
 
+The application does not properly validate user-supplied URLs, allowing server-side requests to arbitrary internal endpoints.
+
 ## 🎯 Result
 
 One of the requests returned a valid response from an internal administrative interface.
