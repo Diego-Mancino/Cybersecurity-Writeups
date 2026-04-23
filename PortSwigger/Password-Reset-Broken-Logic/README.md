@@ -54,7 +54,7 @@ This can lead to full account takeover and compromise of sensitive user data.
 
 ## 🛡️ Mitigation
 
-- Ensure that password reset tokens are strictly bound to the intended user
+- Ensure that password reset token are strictly bound to the intended user
 - Validate all request parameters on the server side
 - Avoid trusting user-controlled input for sensitive operations
 - Implement additional verification steps during password reset processes
