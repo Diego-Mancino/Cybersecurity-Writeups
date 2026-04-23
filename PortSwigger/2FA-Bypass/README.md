@@ -30,6 +30,8 @@ It was observed that the account identifier is passed as a URL parameter.
 
 By modifying the parameter value from "wiener" to "carlos", it was possible to access Carlos's account without completing the 2FA verification step.
 
+The application does not verify that the authenticated user matches the requested account.
+
 
 ## 🎯 Result
 
