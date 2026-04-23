@@ -44,7 +44,8 @@ This demostrates a broken access control vulnerability, where the application fa
 
 An attacker can bypass the 2FA mechanism and gain unauthorized access to other user accounts.
 
-This could lead to account takeover and exposure of sensitive user information.
+This vulnerability allows an attacker with valid credentials to bypass the second authentication factor, effectively reducing the security of the system to single-factor authentication. 
+In real-world scenarios, this could lead to unauthorized account access even when 2FA is enabled.
 
 
 ## 🧠 Key Takeaways
