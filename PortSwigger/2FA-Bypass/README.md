@@ -67,30 +67,41 @@ This could lead to account takeover and exposure of sensitive user information.
 
 ### Login (Wiener)
 
+
 ![Login](images/login-wiener.png)
+
 
 
 ### 2FA Code Request
 
+
 ![2FA](images/2fa-code.png)
+
 
 
 ### Email with Code
 
+
 ![Email](images/email-code.png)
+
 
 
 ### Account Access (Wiener)
 
+
 ![Account](images/account-wiener.png)
+
 
 
 ### URL Parameter (id=wiener)
 
+
 ![URL Wiener](images/url-id-wiener.png)
 
 
+
 ### Lab Solved (id=carlos)
+
 
 ![Solved](images/lab-solved.png)
 
