@@ -32,7 +32,7 @@ When changing the value to 'download-transcript/1.txt', a transcript containing 
 
 ## 🎯 Result
 
-Sensitive information from another user's chat transcript was successfully accessed, including login credentials.
+Sensitive information from another user's chat transcript was successfully accessed, including login credentials. The application does not verify whether the requested file belongs to the authenticated user.
 
 This demostrates a lack of proper access control, allowing unauthorized users to retrive data that does not belong to them.
 
