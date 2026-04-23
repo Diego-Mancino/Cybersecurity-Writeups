@@ -7,7 +7,7 @@ The goal of this lab is to exploit a vulnerability in the password reset functio
 
 ## 🧠 What is the vulnerability?
 
-This lab demonstrates a flaw in the password reset functionality.
+This lab demonstrates a critical flaw in the password reset functionality.
 
 The application generates a valid password reset token but fails to properly validate that the token belongs to the intended user.
 
@@ -39,9 +39,9 @@ This demostrates a critical flaw in the password reset logic, allowing unauthori
 
 ## ⚠️ Impact
 
-An attacker can reset the password of any user by manipulating the request parameters.
+An attacker can abuse this flaw to reset another user's password by combining a valid reset token with a modified username parameter. 
 
-This can lead to full account takeover and compromise of sensitive user data.
+In a real-world scenario, this could lead to unauthorized account takeover, exposure of sensitive user data, and loss of trust in the password reset mechanism.
 
 
 ## 🧠 Key Takeaways
@@ -54,7 +54,7 @@ This can lead to full account takeover and compromise of sensitive user data.
 
 ## 🛡️ Mitigation
 
-- Ensure that password reset token are strictly bound to the intended user
+- Ensure that password reset tokens are strictly bound to the intended user
 - Validate all request parameters on the server side
 - Avoid trusting user-controlled input for sensitive operations
 - Implement additional verification steps during password reset processes
@@ -93,31 +93,4 @@ This can lead to full account takeover and compromise of sensitive user data.
 
 ![Solved](images/lab-solved.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
