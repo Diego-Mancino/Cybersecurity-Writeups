@@ -76,8 +76,54 @@ ls
 This confirmed successful initial access to the system.
 
 
+## 🧠 Post-Exploitation
 
+After obtaining initial access to the system, further enumeration was performed to identify sensitive files and potential privilege escalation vectors.
 
+The web application directory was explored, revealing configuration files that contained valuable information:
+
+```bash
+pwd
+ls -la
+```
+
+During this process, a configuration file was identified:
+
+```bash
+cat /var/www/html/fuel/application/config/database.php
+```
+
+This file contained database credentials, including a password associated with the `root` user.
+
+---
+
+## 🔐 Privilege Escalation
+
+The initial shell obtained was non-interactive, which limited the execution of certain commands such as `su`.
+
+To resolve this limitation, the shell was upgraded by spawning a pseudo-terminal using Python:
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+This technique leverages Python's `pty` module to create a **pseudo-terminal (PTY)**, allowing the attacker to interact with the system in a more stable and fully functional shell environment.
+
+Without a proper TTY, commands like `su` may fail or not prompt for a password correctly. By upgrading the shell, full interaction with the system becomes possible.
+
+Using the credentials previously discovered, it was possible to switch to the root user:
+
+```bash
+su root
+```
+
+After entering the password, root access was successfully obtained.
+
+Finally, the root flag was retrieved:
+
+```bash
+cat /root/root.txt
+```
 
 
 
