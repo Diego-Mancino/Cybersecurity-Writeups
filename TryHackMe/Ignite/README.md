@@ -17,6 +17,7 @@ A network scan was conducted using **Nmap** to detect open ports, running servic
 ```bash
 nmap -sV -sS -O 10.129.158.61
 ```
+![Nmap Scan](images/nmap.png)
 
 The scan results revealed that only **port 80 (HTTP)** was open.
 
