@@ -119,6 +119,7 @@ To resolve this limitation, the shell was upgraded by spawning a pseudo-terminal
 ```bash
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
+![Upgrade Shell](images/upgrade-shell.png)
 
 This technique leverages Python's `pty` module to create a **pseudo-terminal (PTY)**, allowing the attacker to interact with the system in a more stable and fully functional shell environment.
 
@@ -129,6 +130,7 @@ Using the credentials previously discovered, it was possible to switch to the ro
 ```bash
 su root
 ```
+![Root](images/root.png)
 
 After entering the password, root access was successfully obtained.
 
@@ -137,6 +139,7 @@ Finally, the root flag was retrieved:
 ```bash
 cat /root/root.txt
 ```
+![Root Flag](images/root-flag.png)
 
 ---
 
