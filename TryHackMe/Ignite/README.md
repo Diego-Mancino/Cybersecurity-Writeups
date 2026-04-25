@@ -125,9 +125,34 @@ Finally, the root flag was retrieved:
 cat /root/root.txt
 ```
 
+---
 
+## 🏁 Conclusion
 
+This assessment demosnstrated how a vulnerable web application can lead to a full system compromise.
 
+By exploting a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, it was possible to gain initial access to the target system. From there, improper handling of sensitive information allowed the discovery of credentials, which were later used to escalate privileges and obtain **root access**.
+
+This scenario highlights the risks of running outdated software with known vulnerabilities, as well as the dangers of exposing sensitive credentials within configuration files.
+
+### ⚠️ Impact
+
+- Remote attackers can execute arbitrary commands on the server  
+- Unauthorized access to sensitive data  
+- Full system compromise (root access)  
+- Potential lateral movement in a real-world environment  
+
+### 🛡️ Mitigation
+
+- Keep software up to date and apply security patches regularly  
+- Avoid exposing sensitive credentials in configuration files  
+- Implement proper access controls and least privilege principles  
+- Restrict access to administrative interfaces  
+- Validate and sanitize user input to prevent injection vulnerabilities  
+
+---
+
+This lab highlights the importance of proper system hardening and secure development practices to prevent critical vulnerabilities such as RCE.
 
 
 
