@@ -27,6 +27,7 @@ Since this was the only exposed service, the focus of the assessment shifted tow
 ## 🔍 Enumeration & Vulnerability Analysis
 
 To begin the enumeration phase, the **HTTP service** was accessed through a web browser to analyze the application manually.
+![HTTP service](images/HTTP-service.png)
 
 Further inspection revealed the presence of a **user guide**, which disclosed that the application was running **Fuel CMS version 1.4.1**. This information was critical, as it enabled targeted vulnerability research.
 
