@@ -27,11 +27,16 @@ Since this was the only exposed service, the focus of the assessment shifted tow
 ## 🔍 Enumeration & Vulnerability Analysis
 
 To begin the enumeration phase, the **HTTP service** was accessed through a web browser to analyze the application manually.
+
 ![HTTP service](images/HTTP-service.png)
 
 Further inspection revealed the presence of a **user guide**, which disclosed that the application was running **Fuel CMS version 1.4.1**. This information was critical, as it enabled targeted vulnerability research.
 
+![User Guide](images/user-guide.png)
+
 A search for known vulnerabilities affecting this version led to the discovery of a **Remote Code Execution (RCE)** vulnerability (**CVE-2018-16763**). This flaw allows attackers to execute arbitrary system commands via the `filter` parameter in the following endpoint:
+
+![CVE-2018-16763](images/cve.png)
 
 ```text
 /fuel/pages/select/?filter=
