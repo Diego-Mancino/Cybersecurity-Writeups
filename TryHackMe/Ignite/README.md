@@ -163,11 +163,13 @@ cat /root/root.txt
 
 ## 🏁 Conclusion
 
-This assessment demosnstrated how a vulnerable web application can lead to a full system compromise.
+This machine demonstrates the risks associated with outdated web applications and poor credential management.
 
-By exploting a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, it was possible to gain initial access to the target system. From there, improper handling of sensitive information allowed the discovery of credentials, which were later used to escalate privileges and obtain **root access**.
+From an attacker’s perspective, identifying the underlying technology during enumeration allowed for rapid discovery of a known vulnerability, leading to initial access.
 
-This scenario highlights the risks of running outdated software with known vulnerabilities, as well as the dangers of exposing sensitive credentials within configuration files.
+Additionally, improper handling of sensitive information enabled privilege escalation, highlighting the importance of secure configuration practices.
+
+Overall, this challenge reinforces the importance of structured enumeration and understanding how small pieces of information can lead to full system compromise.
 
 ---
 
