@@ -9,7 +9,19 @@
 🔗 [TryHackMe Room - Ignite](https://tryhackme.com/room/ignite)
 
 
+---
 
+## 📘 Introduction
+
+This writeup documents the process of compromising the **Ignite** machine from TryHackMe.
+
+During this lab, several phases were performed, including **reconnaissance**, **enumeration**, exploitation of a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1**, and the establishment of a reverse shell.
+
+Initial access was obtained through the vulnerable web application, followed by further enumeration to identify sensitive information. The shell was then stabilized and leveraged to escalate privileges, ultimately achieving **root access**.
+
+The objective of this room is to exploit a known vulnerability in Fuel CMS to gain access to both user-level and root-level information.
+
+---
 
 ## 🔎 Reconnaissance
 
@@ -26,6 +38,7 @@ The scan results revealed that only **port 80 (HTTP)** was open.
 
 Since this was the only exposed service, the focus of the assessment shifted towards analyzing the **web application** as the primary attack surface.
 
+---
 
 ## 🔍 Enumeration & Vulnerability Analysis
 
@@ -55,6 +68,7 @@ This exploit is written in **Python** and leverages the vulnerable endpoint to a
 
 The script was downloaded and prepared for use in the next phase of the attack.
 
+---
 
 ## 💥 Exploitation
 
@@ -88,6 +102,7 @@ ls
 
 This confirmed successful initial access to the system.
 
+---
 
 ## 🧠 Post-Exploitation
 
@@ -154,12 +169,16 @@ By exploting a **Remote Code Execution (RCE)** vulnerability in **Fuel CMS 1.4.1
 
 This scenario highlights the risks of running outdated software with known vulnerabilities, as well as the dangers of exposing sensitive credentials within configuration files.
 
+---
+
 ### ⚠️ Impact
 
 - Remote attackers can execute arbitrary commands on the server  
 - Unauthorized access to sensitive data  
 - Full system compromise (root access)  
 - Potential lateral movement in a real-world environment  
+
+---
 
 ### 🛡️ Mitigation
 
