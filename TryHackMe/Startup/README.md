@@ -1,4 +1,12 @@
+# 🔥 Startup - TryHackMe Writeup
 
+![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
+![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
+![Ignite](images/startup.png)
+
+🔗 [TryHackMe Room - Ignite](https://tryhackme.com/room/startup)
 
 
 
