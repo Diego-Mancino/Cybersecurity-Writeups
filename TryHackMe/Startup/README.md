@@ -124,6 +124,8 @@ After gaining access to the target machine, further enumeration was performed to
 
 During this process, a directory named `/incidents` was discovered, which appeared unusual and worth investigating.
 
+![incidents](images/incidents.png)
+
 Listing its contents revealed a network capture file:
 
 - `suspicious.pcapng`
@@ -145,6 +147,8 @@ The captured file was analyzed using Wireshark:
 ```bash
 wireshark suspicious.pcapng
 ```
+![wireshark](images/wireshark)
+
 During the analysis, multiple TCP streams were inspected using the Follow → TCP Stream feature.
 
 This allowed reconstruction of the communication between systems, revealing commands executed on the target machine.
@@ -155,6 +159,8 @@ Within one of the streams, a failed **sudo** attempt was observed, followed by a
 [sudo] password for www-data:
 c4ntg3t3n0ughsp1c3
 ```
+![password](images/password.png)
+
 This indicates that sensitive credentials were transmitted over the network without encryption, making them visible in the capture file.
 
 The discovered password was then used to attempt access to other users on the system.
@@ -177,6 +183,7 @@ Inspecting the contents of this file:
 ```bash
 cat /home/lennie/scripts/planner.sh
 ```
+![planner.sh](images/planner.sh.png)
 
 It was observed that the script executes another file located at:
 
@@ -200,9 +207,13 @@ nc -lvnp 4445
 ```
 Once the script was executed automatically by the system, a reverse shell was received with root privileges.
 
+![root](images/root.png)
+
 This allowed full access to the system as root.
 
 Finally, with root privileges obtained, the `root.txt` file was accessed, successfully completing the challenge and confirming full system compromise.
+
+![root-flag](images/flag.png)
 
 ---
 
