@@ -30,6 +30,7 @@ To achieve this, an Nmap scan was performed using the following command:
 ```bash
 nmap -sC -sV 10.129.140.31
 ```
+
   <img src="images/nmap.png" width="600">
 
 This scan revealed several open ports and services:
@@ -56,6 +57,7 @@ To continue the assessment, the FTP service was accessed using anonymous credent
 ```bash
 ftp 10.129.140.31
 ```
+
 ![login-ftp](images/ftp.png)
 
 Anonymous login was successful, confirming the misconfiguration identified during the reconnaissance phase.
@@ -74,6 +76,7 @@ Directory enumeration was performed using Gobuster:
 ```bash
 gobuster dir -u http://10.129.140.31 -w /usr/share/wordlists/dirb/small.txt
 ```
+
 ![gobuster](images/gobuster.png)
 
 This revealed the `/files` directory.
@@ -107,6 +110,7 @@ Since the FTP directory is exposed via the web server, the file can be accessed 
 ```bash
 http://10.129.140.31/files/ftp/shell.php
 ```
+
   <img src="images/web.png" width="500">
 
 On the attacker machine, a listener was started using Netcat:
@@ -122,6 +126,7 @@ The initial shell obtained is limited and does not provide full terminal functio
 ```bash
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
+
 ![reverse-shell](images/reverse-shell.png)
 
 This command upgrades the shell, allowing better interaction, command history, and proper terminal behavior.
@@ -145,18 +150,23 @@ Direct access to the file was restricted, so an alternative approach was used to
 ```bash
 cp /incidents/suspicious.pcapng /var/www/html/files/ftp/
 ```
+
 Once copied, the file became accessible through the browser:
 
 ```bash
 http://10.129.140.31/files/ftp/suspicious.pcapng
 ```
+
 The file was then downloaded to the attacker machine for further analysis.
+
+### 🔬 Traffic Analysis
 
 The captured file was analyzed using Wireshark:
 
 ```bash
 wireshark suspicious.pcapng
 ```
+
 ![wireshark](images/wireshark.png)
 
 During the analysis, multiple TCP streams were inspected using the Follow → TCP Stream feature.
@@ -169,6 +179,7 @@ Within one of the streams, a failed **sudo** attempt was observed, followed by a
 [sudo] password for www-data:
 c4ntg3t3n0ughsp1c3
 ```
+
 ![password](images/password.png)
 
 This indicates that sensitive credentials were transmitted over the network without encryption, making them visible in the capture file.
@@ -186,6 +197,7 @@ Using the credentials discovered during the traffic analysis phase, access to th
 ```bash
 su lennie
 ```
+
 After switching to the **lennie** user, further enumeration was performed within the home directory. This revealed a directory named **scripts**, containing a file called **planner.sh**.
 
 Inspecting the contents of this file:
@@ -193,6 +205,7 @@ Inspecting the contents of this file:
 ```bash
 cat /home/lennie/scripts/planner.sh
 ```
+
 ![planner.sh](images/planner.sh.png)
 
 It was observed that the script executes another file located at:
