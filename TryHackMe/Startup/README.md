@@ -30,7 +30,9 @@ To achieve this, an Nmap scan was performed using the following command:
 ```bash
 nmap -sC -sV 10.129.140.31
 ```
-![nmap-scan](images/nmap.png)
+<p align="center">
+  <img src="images/startup.png" width="500">
+</p>
 
 This scan revealed several open ports and services:
 
