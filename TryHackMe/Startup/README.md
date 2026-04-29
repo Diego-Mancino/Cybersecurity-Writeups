@@ -147,7 +147,7 @@ The captured file was analyzed using Wireshark:
 ```bash
 wireshark suspicious.pcapng
 ```
-![wireshark](images/wireshark)
+![wireshark](images/wireshark.png)
 
 During the analysis, multiple TCP streams were inspected using the Follow → TCP Stream feature.
 
