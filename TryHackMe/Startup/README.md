@@ -46,7 +46,7 @@ To continue the assessment, the FTP service was accessed using anonymous credent
 ```bash
 ftp 10.129.140.31
 ```
-![login-ftp][ftp.png]
+![login-ftp](images/ftp.png)
 
 Anonymous login was successful, confirming the misconfiguration identified during the reconnaissance phase.
 
@@ -64,7 +64,7 @@ Directory enumeration was performed using Gobuster:
 ```bash
 gobuster dir -u http://10.129.140.31 -w /usr/share/wordlists/dirb/small.txt
 ```
-![gobuster][gobuster.png]
+![gobuster](images/gobuster.png)
 
 This revealed the `/files` directory.
 
@@ -97,7 +97,7 @@ Since the FTP directory is exposed via the web server, the file can be accessed 
 ```bash
 http://10.129.140.31/files/ftp/shell.php
 ```
-![web](web.png)
+![web](images/web.png)
 
 On the attacker machne, a listener was started using Netcat:
 
@@ -112,7 +112,7 @@ The initial shell obtained is limited and does not provide full terminal functio
 ```bash
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
-![reverse-shell](reverse-shell.png)
+![reverse-shell](images/reverse-shell.png)
 
 This command upgrades the shell, allowing better interaction, command history, and proper terminal behavior.
 
