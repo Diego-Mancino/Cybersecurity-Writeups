@@ -109,7 +109,7 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 This command upgrades the shell, allowing better interaction, command history, and proper terminal behavior.
 
 
-# 🧠 Post-Exploitation
+## 🧠 Post-Exploitation
 
 After gaining access to the target machine, further enumeration was performed to identify interesting files and directories.
 
