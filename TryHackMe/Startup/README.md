@@ -9,6 +9,7 @@ This writeup documents the process of compromising the **Startup** machine from 
 
 The lab focuses on exploiting a misconfigured FTP service that allows file upload, leading to Remote Code Execution (RCE). Further enumeration reveals sensitive network traffic containing credentials, which are used to gain access to another user and escalate privileges to root.
 
+---
 
 ## 🔍 Reconnaissance
 
@@ -19,6 +20,7 @@ To achieve this, an Nmap scan was performed using the following command:
 ```bash
 nmap -sC -sV 10.129.140.31
 ```
+![nmap-scan](images/nmap.png)
 
 This scan revealed several open ports and services:
 
@@ -35,6 +37,7 @@ This suggests that the FTP server is misconfigured and may allow file interactio
 
 Although the web service (port 80) is also available, no useful information is observed at this stage, so the focus remains on the FTP service for further exploitation.
 
+---
 
 ## 📂 Enumeration
 
@@ -71,6 +74,7 @@ htttp://10.129.140.31/files/ftp/
 
 This indicates that the files uploaded via FTP are publicly accesible through the web server, creating a potential path for exploitation.
 
+---
 
 ## 💥 Exploitation
 
@@ -108,6 +112,7 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 This command upgrades the shell, allowing better interaction, command history, and proper terminal behavior.
 
+---
 
 ## 🧠 Post-Exploitation
 
@@ -152,6 +157,7 @@ The discovered password was then used to attempt access to other users on the sy
 
 **This highlights the risk of transmitting sensitive information over unencrypted channels, as it can be easily intercepted and analyzed.**
 
+---
 
 ### 🔐 Privilege Escalation
 
@@ -194,7 +200,7 @@ This allowed full access to the system as root.
 
 Finally, with root privileges obtained, the `root.txt` file was accessed, successfully completing the challenge and confirming full system compromise.
 
-
+---
 
 ## 🧾 Conclusion
 
@@ -213,6 +219,7 @@ This lab highlights the importance of:
 
 Overall, it provides a clear example of how attackers combine enumeration, exploitation, and privilege escalation techniques to compromise a system.
 
+---
 
 ## ⚠️ Impact
 
@@ -230,7 +237,6 @@ Overall, it provides a clear example of how attackers combine enumeration, explo
 - Use encryption (e.g., SSH, HTTPS) to protect sensitive data in transit
 - Apply the principle of least privilege to system users and scripts
 - Regularly audit and secure scripts executed with elevated privileges
-
 
 
 > 🔒 This lab highlights how small misconfigurations can lead to full system compromise.
