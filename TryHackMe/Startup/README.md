@@ -107,7 +107,7 @@ Since the FTP directory is exposed via the web server, the file can be accessed 
 ```bash
 http://10.129.140.31/files/ftp/shell.php
 ```
-![web](images/web.png)
+  <img src="images/web.png" width="500">
 
 On the attacker machine, a listener was started using Netcat:
 
