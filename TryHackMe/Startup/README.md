@@ -4,7 +4,9 @@
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-![Startup](images/Startup.png)
+<p align="center">
+  <img src="images/startup.png" width="300">
+</p>
 
 🔗 [TryHackMe Room - Startup](https://tryhackme.com/room/startup)
 
