@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 <p align="center">
-  <img src="images/startup.png" width="300">
+  <img src="images/Startup.png" width="300">
 </p>
 
 🔗 [TryHackMe Room - Startup](https://tryhackme.com/room/startup)
