@@ -44,6 +44,7 @@ gobuster dir -u http://10.129.167.91/content -w /usr/share/wordlists/dirb/common
 This revealed several interesting directories, including:
 
 **- /as** → administrative login panel
+
 **- /inc** → internal application files and exposed resources
 
 
@@ -66,7 +67,7 @@ Because MD5 is considered cryptographically weak and vulnerable to cracking atta
 
 Recovered credentials:
 
-- Username: `mmanager`
+- Username: `manager`
 - Password: `Password123`
 
 
