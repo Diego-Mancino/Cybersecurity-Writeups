@@ -1,4 +1,4 @@
-# TryHackMe - LazyAdmin Writeup
+# 🖥️ TryHackMe - LazyAdmin Writeup
 ---
 ![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
@@ -14,7 +14,7 @@
 
 
 
-## Introduction
+## 📖 Introduction
 
 This writeup documents the exploitation process of the TryHackMe **LazyAdmin** machine.
 
@@ -22,8 +22,9 @@ The objective of this challenge was to identify exposed services, enumerate the 
 
 The attack path involved discovering hidden web content, obtaining sensitive credentials from exposed files, abusing file upload functionality to obtain a reverse shell, and leveraging misconfigured sudo permissions for privilege escalation.
 
+---
 
-## Reconnaissance
+## 🔎 Reconnaissance
 
 An initial Nmap scan was performed to identify open ports, running services, and potential attack vectors on the target machine.
 
@@ -33,14 +34,17 @@ nmap -sC -sV -T4 -O 10.129.167.91
 
 <img src="images/nmap.jpg" width="600">
 
+
 The scan revealed that the target exposed an HTTP service on port 80, indicating the presence of a web application as the primary attack surface.
 
 Service version detection and default script scanning were enabled to gather additional information during the reconnaissance phase.
 
+---
 
-## Enumeration
+## 🔍 Enumeration
 
-### Directory Enumeration
+
+### 📂 Directory Enumeration
 
 Since the initial web application presented a limited attack surface, directory brute-forcing was performed using Gobuster.
 
@@ -58,6 +62,7 @@ gobuster dir -u http://10.129.167.91/content -w /usr/share/wordlists/dirb/common
 
 <img src="images/gobuster.jpg" width="600">
 
+
 This revealed several interesting directories, including:
 
 **- /as** → administrative login panel
@@ -65,7 +70,7 @@ This revealed several interesting directories, including:
 **- /inc** → internal application files and exposed resources
 
 
-### Sensitive File Discovery
+### 📂 Sensitive File Discovery
 
 Browsing the `/content/inc` directory exposed several application files and a publicly accessible MySQL backup directory.
 
@@ -73,7 +78,8 @@ Inside the `mysql_backup` directory, a SQL backup file was discovered and downlo
 
 <img src="images/mysql.jpg" width="600">
 
-### Credential Extraction
+
+### 🔑 Credential Extraction
 
 Reviewing the SQL dump revealed credentials associated with the `manager` account.
 
@@ -83,9 +89,11 @@ The password was stored as the following MD5 hash:
 
 <img src="images/hash.jpg" width="600">
 
+
 Because MD5 is considered cryptographically weak and vulnerable to cracking attacks, the hash was successfully recovered using an online hash database.
 
 <img src="images/decrypt.jpg" width="600">
+
 
 Recovered credentials:
 
@@ -93,22 +101,25 @@ Recovered credentials:
 - Password: `Password123`
 
 
-### Administrative Access
+### 🔐 Administrative Access
 
 The recovered credentials were used to authenticate against the SweetRice administrative panel located at `/content/as`.
 
 This provided administrative access to the web application.
 
+---
 
-## Exploitation
+## 💥 Exploitation
 
-### File Upload Abuse
+
+### 📤 File Upload Abuse
 
 After obtaining administrative access, the functionality of the SweetRice CMS was reviewed for potential file upload abuse.
 
 The `Ads` section allowed arbitrary files to be uploaded and stored inside the web application directory structure. This behavior allowed arbitrary PHP code execution through a reverse shell payload upload.
 
 <img src="images/upload-shell.jpg" width="600">
+
 
 A Netcat listener was started on the attacking machine:
 
@@ -118,7 +129,8 @@ nc -lvnp 4444
 
 A PHP reverse shell payload was uploaded through the administrative interface.
 
-### Reverse Shell
+
+### 🐚 Reverse Shell
 
 After uploading the payload, the file became accessible at:
 
@@ -126,13 +138,16 @@ After uploading the payload, the file became accessible at:
 
 Accessing the uploaded PHP file triggered the reverse shell connection back to the attacking machine.
 
-Successful code execution resulted in a shell running as the `www-data` user.
+> Successful code execution resulted in a shell running as the `www-data` user.
 
 <img src="images/reverse-shell.jpg" width="600">
 
-## Privilege Escalation
+---
 
-### Sudo Enumeration
+## 🚀 Privilege Escalation
+
+### 🛠️ Sudo Enumeration
+
 
 After obtaining a shell as `www-data`, sudo privileges were enumerated using:
 
@@ -142,12 +157,14 @@ sudo -l
 
 <img src="images/sudo-l.jpg" width="600">
 
+
 The output revealed that the current user was allowed to execute the following Perl script with elevated privileges:
 
 `/usr/bin/perl /home/itguy/backup.pl`
 
 
-### Exploiting Insecure Script Execution
+### 🧩 Exploiting Insecure Script Execution
+
 
 Inspection of the Perl script revealed that it called the following command:
 
@@ -167,7 +184,10 @@ Execution of the script resulted in a root shell and full system compromise.
 
 <img src="images/root.jpg" width="750">
 
-## Conclusion
+
+---
+
+## 🏁 Conclusion
 
 This machine demonstrated how multiple weaknesses can be chained together to achieve full system compromise.
 
@@ -186,8 +206,9 @@ This lab highlights the importance of:
 
 Overall, the machine provides a realistic example of how attackers combine enumeration, credential abuse, remote code execution, and privilege escalation techniques to compromise a Linux-based web server.
 
+---
 
-## Impact
+## ⚠️ Impact
 
 The vulnerabilities identified in this machine could allow an attacker to fully compromise the target system through a combination of information disclosure, remote code execution through arbitrary file upload, and privilege escalation.
 
@@ -203,7 +224,7 @@ An attacker with root privileges would have complete control over the target sys
 
 ---
 
-## Mitigation
+## 🛡️ Mitigation
 
 The following security measures would significantly reduce the risk of compromise:
 
