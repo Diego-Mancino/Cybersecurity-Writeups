@@ -8,7 +8,7 @@
   <img src="images/LazyAdmin.png" width="300">
 </p>
 
-🔗 [TryHackMe Room - Startup](https://tryhackme.com/room/lazyadmin)
+🔗 [TryHackMe Room - LazyAdmin](https://tryhackme.com/room/lazyadmin)
 
 
 
@@ -30,6 +30,8 @@ An initial Nmap scan was performed to identify open ports, running services, and
 ```bash
 nmap -sC -sV -T4 -O 10.129.167.91
 ```
+
+<img src="images/nmap.png" width="750">
 
 The scan revealed that the target exposed an HTTP service on port 80, indicating the presence of a web application as the primary attack surface.
 
