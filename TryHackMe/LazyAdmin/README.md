@@ -1,3 +1,6 @@
+# TryHackMe - LazyAdmin Writeup
+---
+
 
 
 
@@ -75,7 +78,7 @@ Recovered credentials:
 
 The recovered credentials were used to authenticate against the SweetRice administrative panel located at `/content/as`.
 
-This provied administrative access to the web application.
+This provided administrative access to the web application.
 
 
 ## Exploitation
@@ -84,7 +87,7 @@ This provied administrative access to the web application.
 
 After obtaining administrative access, the functionality of the SweetRice CMS was reviewed for potential file upload abuse.
 
-The `Ads` section allowed arbitrary files to be uploaded and stored inside the web application directory structure. This allowed the upload of a PHP reverse shell payload.
+The `Ads` section allowed arbitrary files to be uploaded and stored inside the web application directory structure. This behavior allowed arbitrary PHP code execution through a reverse shell payload upload.
 
 A Netcat listener was started on the attacking machine:
 
@@ -109,15 +112,15 @@ Successful code execution resulted in a shell running as the `www-data` user.
 
 ### Sudo Enumeration
 
-After obtaining a shell as `www.data`, sudo privileges were enumerated using:
+After obtaining a shell as `www-data`, sudo privileges were enumerated using:
 
 ```bash
 sudo -l
 ```
 
-The output revealed that the current user could to execute the following Perl script with elevated privileges:
+The output revealed that the current user was allowed to execute the following Perl script with elevated privileges:
 
-`usr/bin/perl /home/itguy/backup.pl`
+`/usr/bin/perl /home/itguy/backup.pl`
 
 
 ### Exploiting Insecure Script Execution
@@ -147,7 +150,7 @@ The attack began with web enumeration, which exposed hidden application director
 
 After gaining access to the administrative panel, an unrestricted file upload functionality within the application allowed arbitrary PHP code execution, leading to a reverse shell as the `www-data` user.
 
-Finally, privilege escalation was possible due to a misconfigured sudo rule... that executed a writable script with elevated privileges, resulting in full root access.
+Finally, privilege escalation was possible due to a misconfigured sudo rule that executed a writable script with elevated privileges, resulting in full root access.
 
 This lab highlights the importance of:
 
