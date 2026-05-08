@@ -1,5 +1,15 @@
 # TryHackMe - LazyAdmin Writeup
 ---
+![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
+![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
+<p align="center">
+  <img src="images/LazyAdmin.png" width="300">
+</p>
+
+🔗 [TryHackMe Room - Startup](https://tryhackme.com/room/lazyadmin)
+
 
 
 
