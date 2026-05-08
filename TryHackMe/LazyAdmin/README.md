@@ -56,6 +56,8 @@ Further enumeration was performed against the newly discovered /content director
 gobuster dir -u http://10.129.167.91/content -w /usr/share/wordlists/dirb/common.txt
 ```
 
+<img src="images/gobuster.jpg" width="750">
+
 This revealed several interesting directories, including:
 
 **- /as** → administrative login panel
@@ -69,6 +71,7 @@ Browsing the `/content/inc` directory exposed several application files and a pu
 
 Inside the `mysql_backup` directory, a SQL backup file was discovered and downloaded for offline analysis.
 
+<img src="images/mysql.jpg" width="750">
 
 ### Credential Extraction
 
@@ -78,7 +81,11 @@ The password was stored as the following MD5 hash:
 
 `42f749ade7f9e195bf475f37a44cafcb`
 
+<img src="images/hash.jpg" width="750">
+
 Because MD5 is considered cryptographically weak and vulnerable to cracking attacks, the hash was successfully recovered using an online hash database.
+
+<img src="images/decypt.jpg" width="750">
 
 Recovered credentials:
 
@@ -101,6 +108,8 @@ After obtaining administrative access, the functionality of the SweetRice CMS wa
 
 The `Ads` section allowed arbitrary files to be uploaded and stored inside the web application directory structure. This behavior allowed arbitrary PHP code execution through a reverse shell payload upload.
 
+<img src="images/upload-shell.jpg" width="750">
+
 A Netcat listener was started on the attacking machine:
 
 ```bash
@@ -119,6 +128,7 @@ Accessing the uploaded PHP file triggered the reverse shell connection back to t
 
 Successful code execution resulted in a shell running as the `www-data` user.
 
+<img src="images/reverse-shell.jpg" width="750">
 
 ## Privilege Escalation
 
@@ -129,6 +139,8 @@ After obtaining a shell as `www-data`, sudo privileges were enumerated using:
 ```bash
 sudo -l
 ```
+
+<img src="images/sudo-l.jpg" width="750">
 
 The output revealed that the current user was allowed to execute the following Perl script with elevated privileges:
 
@@ -153,6 +165,7 @@ The vulnerable Perl script was then executed with sudo privileges:
 
 Execution of the script resulted in a root shell and full system compromise.
 
+<img src="images/root.jpg" width="750">
 
 ## Conclusion
 
