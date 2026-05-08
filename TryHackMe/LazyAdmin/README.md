@@ -31,7 +31,7 @@ An initial Nmap scan was performed to identify open ports, running services, and
 nmap -sC -sV -T4 -O 10.129.167.91
 ```
 
-<img src="images/nmap.png" width="750">
+<img src="images/nmap.jpg" width="750">
 
 The scan revealed that the target exposed an HTTP service on port 80, indicating the presence of a web application as the primary attack surface.
 
