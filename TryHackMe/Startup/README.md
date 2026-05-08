@@ -31,7 +31,7 @@ I began the assessment by performing an Nmap scan to identify open ports and exp
 nmap -sC -sV 10.129.140.31
 ```
 
-  <img src="images/nmap.png" width="600">
+  <img src="images/nmap.jpg" width="600">
 
 This scan revealed several open ports and services:
 
