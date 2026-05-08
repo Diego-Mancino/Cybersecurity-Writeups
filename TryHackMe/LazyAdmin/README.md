@@ -65,10 +65,9 @@ gobuster dir -u http://10.129.167.91/content -w /usr/share/wordlists/dirb/common
 
 This revealed several interesting directories, including:
 
-**- /as** → administrative login panel
+`- /as` → administrative login panel
 
-**- /inc** → internal application files and exposed resources
-
+`- /inc` → application-related files and exposed resources
 
 ### 📂 Sensitive File Discovery
 
