@@ -117,7 +117,7 @@ sudo -l
 
 The output revealed that the current user could to execute the following Perl script with elevated privileges:
 
-´usr/bin/perl /home/itguy/backup.pl`
+`usr/bin/perl /home/itguy/backup.pl`
 
 
 ### Exploiting Insecure Script Execution
