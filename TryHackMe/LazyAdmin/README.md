@@ -42,15 +42,15 @@ Service version detection and default script scanning were enabled to gather add
 
 ### Directory Enumeration
 
-Since the initial web application exposed limited functionality, directory brute-forcing was performed using Gobuster.
+Since the initial web application presented a limited attack surface, directory brute-forcing was performed using Gobuster.
 
 ```bash
 gobuster dir -u http://10.129.167.91 -w /usr/share/wordlists/dirb/common.txt
 ```
 
-The scan revealed the /content directory, suggesting the presence of additional hidden resources and a possible content management system.
+The scan revealed the `/content` directory, suggesting the presence of additional hidden resources and a possible content management system.
 
-Further enumeration was performed against the newly discovered /content directory.
+Further enumeration was performed against the newly discovered `/content` directory.
 
 ```bash
 gobuster dir -u http://10.129.167.91/content -w /usr/share/wordlists/dirb/common.txt
@@ -189,7 +189,7 @@ Overall, the machine provides a realistic example of how attackers combine enume
 
 ## Impact
 
-The vulnerabilities identified in this machine could allow an attacker to fully compromise the target system through a combination of information disclosure, authenticated remote code execution, and privilege escalation.
+The vulnerabilities identified in this machine could allow an attacker to fully compromise the target system through a combination of information disclosure, remote code execution through arbitrary file upload, and privilege escalation.
 
 Successful exploitation could result in:
 
@@ -216,5 +216,4 @@ The following security measures would significantly reduce the risk of compromis
 - Regularly audit scripts executed with elevated privileges
 - Monitor web server directories for unauthorized file uploads or modifications
 
-🔒 This lab demonstrates how multiple security weaknesses can be chained together to achieve full system compromise.
-
+🔒 Proper hardening, secure credential storage, and least privilege enforcement are essential to reducing the risk of full system compromise.
