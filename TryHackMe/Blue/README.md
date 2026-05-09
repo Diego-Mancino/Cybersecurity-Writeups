@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 <p align="center">
-  <img src="images/blue.png" width="300">
+  <img src="images/blue.png" width="500">
 </p>
 
 🔗 [TryHackMe Room - Blue](https://tryhackme.com/room/blue)
@@ -37,6 +37,10 @@ An initial vulnerability-focused Nmap scan was performed against the target syst
 nmap -sV --script vuln 10.128.170.33
 ```
 
+<img src="images/nmap-command.png" width="500">
+
+
+
 The scan revealed that the target exposed the SMB service on port `445` and was vulnerable to **MS17-010**, a critical flaw affecting Microsoft SMBv1 implementations that enables remote code execution.
 
 Nmap identified the vulnerabilty with the following result:
@@ -44,6 +48,11 @@ Nmap identified the vulnerabilty with the following result:
 - `smb-vuln-ms17-010`
 - State: `VULNERABLE`
 - `CVE-2017-0143`
+
+
+<img src="images/nmap-output.png" width="500">
+
+
 
 This vulnerability became widely known after being weaponized during the **WannaCry** ransomware outbreak in 2017.
 
@@ -78,13 +87,25 @@ The following EternalBlue exploit module was selected:
 exploit/windows/smb/ms17_010_eternalblue
 ```
 
+<img src="images/msf.png" width="500">
+
+
 A reverse TCP shell payload was configured to establish a command shell connection back to the attacking machine after successful exploitation.
 
 The following payload was used:
 
 `windows/x64/shell/reverse_tcp`
 
+
+<img src="images/payload.png" width="500">
+
+
 The exploit was configured with the target IP address (`RHOSTS)` and the attacker's listening host (`LHOST`) before execution.
+
+
+<img src="images/options.png" width="500">
+
+
 
 Successful exploitation resulted in remote code execution on the target system and spawned a command shell with `NT AUTHORITY\SYSTEM` privileges.
 
@@ -100,9 +121,16 @@ The following commands were executed:
 
 ```cmd
 whoami
-hostname
 systeminfo
+hostname
 ```
+
+<img src="images/post-exploitation.png" width="500">
+
+
+<img src="images/post-exploitation2.png" width="500">
+
+
 
 The output confirmed that the target system was running:
 
@@ -169,26 +197,3 @@ The following security measures can significantly reduce the risk associated wit
 Organizations should also maintain proper patch management procedures to prevent known vulnerabilities from remaining exploitable in production environments.
 
 🔒 This lab demonstrates the severe impact of unpatched network services in real-world environments.
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
