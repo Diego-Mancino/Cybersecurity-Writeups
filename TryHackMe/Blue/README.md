@@ -73,7 +73,7 @@ The scan identified the following vulnerable service:
 - Vulnerability: `MS17-010`
 - CVE: `CVE-2017-0143`
 
-Due to the severity of the vulnerability and the availability of public exploit modules, the target was considered vulnerable to remote compromise.
+Due to the severity of the vulnerability and the availability of public exploit modules, the target was determined to be vulnerable to remote compromise.
 
 ---
 
@@ -107,7 +107,7 @@ The exploit was configured with the target IP address (`RHOSTS`) and the attacke
 
 
 
-Successful exploitation resulted in remote code execution on the target system and spawned a reverse shell connection with `NT AUTHORITY\SYSTEM` privileges.
+Successful exploitation resulted in remote code execution on the target system and provided a reverse shell connection with `NT AUTHORITY\SYSTEM` privileges.
 
 ---
 
