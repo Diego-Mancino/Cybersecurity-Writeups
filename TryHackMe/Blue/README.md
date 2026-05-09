@@ -128,7 +128,7 @@ hostname
 <img src="images/post-exploitation.png" width="500">
 
 
-<img src="images/post-exploitation2.png" width="500">
+<img src="images/post-exploitation2.png" width="400">
 
 
 
