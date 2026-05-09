@@ -19,7 +19,7 @@
 ## 📖 Introduction
 
 
-This writeup documents the exploitation of the TryHackMe **Blue** machine, a Windows target vulnerable to the SMBv1 vulnerability addressed in **MS17-010**, publicly exploited through **EternalBlue**
+This writeup documents the exploitation of the TryHackMe **Blue** machine, a Windows target vulnerable to the SMBv1 vulnerability addressed in **MS17-010**, publicly exploited through **EternalBlue**.
 
 The objective was to identify exposed SMB services, confirm the presence of the MS17-010 vulnerability, exploit it to gain remote code execution, and validate system-level compromise.
 
