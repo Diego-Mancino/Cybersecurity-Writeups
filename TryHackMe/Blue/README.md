@@ -1,4 +1,4 @@
-# 🖥️ TryHackMe - Blue Writeup
+# 🪟 TryHackMe - Blue Writeup
 ---
 ![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
@@ -21,7 +21,7 @@
 
 This writeup documents the exploitation of the TryHackMe **Blue** machine, a Windows target vulnerable to the SMBv1 vulnerability addressed in **MS17-010**, publicly exploited through **EternalBlue**
 
-The objetive was to identify exposed SMB services, confirm the presence of the MS17-010 vulnerability, exploit it to gain remote access, and validate system-level compromise.
+The objective was to identify exposed SMB services, confirm the presence of the MS17-010 vulnerability, exploit it to gain remote code execution, and validate system-level compromise.
 
 This machine is especially relevant because EternalBlue was one of the vulnerabilities abused during the WannaCry ransomware outbreak, demonstrating how an exposed and unpatched SMB service can lead to severe real-world impact.
 
@@ -43,7 +43,7 @@ nmap -sV --script vuln 10.128.170.33
 
 The scan revealed that the target exposed the SMB service on port `445` and was vulnerable to **MS17-010**, a critical flaw affecting Microsoft SMBv1 implementations that enables remote code execution.
 
-Nmap identified the vulnerabilty with the following result:
+Nmap identified the vulnerability with the following result:
 
 - `smb-vuln-ms17-010`
 - State: `VULNERABLE`
@@ -54,7 +54,7 @@ Nmap identified the vulnerabilty with the following result:
 
 
 
-This vulnerability became widely known after being weaponized during the **WannaCry** ransomware outbreak in 2017.
+This vulnerability became widely known after being widely abused during the **WannaCry** ransomware outbreak in 2017.
 
 ---
 
@@ -64,7 +64,7 @@ The vulnerability scan identified the target as vulnerable to **MS17-010**, publ
 
 MS17-010 is a critical vulnerability in the Microsoft SMBv1 protocol that allows unauthenticated attackers to execute arbitrary code remotely by sending specially crafted SMB packets to the target system.
 
-Because SMB services are commonly exposed within enterprise environments, this vulnerability became extremely dangerous and was later weaponized by the **WannaCry** ransomware campaign in 2017.
+Because SMB services are commonly exposed within enterprise environments, this vulnerability became highly impactful and was later weaponized by the **WannaCry** ransomware campaign in 2017.
 
 The scan identified the following vulnerable service:
 
@@ -100,14 +100,14 @@ The following payload was used:
 <img src="images/payload.png" width="500">
 
 
-The exploit was configured with the target IP address (`RHOSTS)` and the attacker's listening host (`LHOST`) before execution.
+The exploit was configured with the target IP address (`RHOSTS`) and the attacker's listening host (`LHOST`) before execution.
 
 
 <img src="images/options.png" width="500">
 
 
 
-Successful exploitation resulted in remote code execution on the target system and spawned a command shell with `NT AUTHORITY\SYSTEM` privileges.
+Successful exploitation resulted in remote code execution on the target system and spawned a reverse shell connection with `NT AUTHORITY\SYSTEM` privileges.
 
 ---
 
@@ -115,7 +115,7 @@ Successful exploitation resulted in remote code execution on the target system a
 
 After successful exploitation, a command shell was obtained with `NT AUTHORITY\SYSTEM` privileges, providing full administrative control over the target machine.
 
-Initial Post-exploitation enumeration was performed to validate the compromise and identify system information.
+Initial post-exploitation enumeration was performed to validate the compromise and identify system information.
 
 The following commands were executed:
 
