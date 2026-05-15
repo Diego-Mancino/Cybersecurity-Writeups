@@ -1,11 +1,15 @@
 # 🖥️ Hack The Box - Devel Writeup
 
+---
+
 ![Platform](https://img.shields.io/badge/Platform-HackTheBox-orange)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![OS](https://img.shields.io/badge/OS-Windows-blue)
 
-
+<p align="center">
+  <img src="images/Devel.png" width="300">
+</p>
 
 🔗 [Hack The Box Machine - Devel](https://app.hackthebox.com/machines/Devel?sort_by=created_at&sort_type=desc)
 
