@@ -114,7 +114,7 @@ run
 
 
 
-The uploaded payload was then executed by accessing the following URL through the IIS web server:
+The uploaded ASPX payload was executed by accessing the file through the IIS web server:
 
 ```text
 http://10.129.167.91/shell.aspx
