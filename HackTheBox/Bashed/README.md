@@ -56,7 +56,7 @@ The presence of an exposed Apache web application suggested that further web enu
 Web directory enumeration was performed using Gobuster in order to discover hidden or accessible directories exposed by the web server.
 
 ```bash
-gobuster dir -u http://<TARGET-IP> -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://10.129.48.91 -w /usr/share/wordlists/dirb/common.txt
 ```
 
 
