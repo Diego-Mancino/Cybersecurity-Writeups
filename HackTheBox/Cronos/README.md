@@ -199,14 +199,58 @@ root
 This resulted in full administrative control over the target system.
 
 
+---
 
 
+## 📌 Conclusion
+
+Cronos demonstrated how multiple low-level misconfigurations and vulnerabilities can be chained together to achieve full system compromise.
+
+The attack began with DNS enumeration through a successful zone transfer, which exposed hidden subdomains associated with the target. A vulnerable login panel was then bypassed using SQL injection, granting access to an administrative interface vulnerable to command injection.
+
+Remote code execution as the `www-data` user allowed further system enumeration, ultimately revealing a writable Laravel scheduled task executed automatically by `root`. By overwriting the writable Laravel `artisan` script with a reverse shell payload, arbitrary code execution was achieved with `root` privileges.
+
+This machine highlights the risks associated with insecure DNS configurations, vulnerable web application logic, insufficient input sanitization, and improperly secured scheduled tasks running with elevated privileges.
 
 
+---
 
 
+## ⚠️ Impact
+
+Successful exploitation of the target system resulted in full compromise of the Linux server.
+
+An attacker was able to:
+
+- Enumerate internal infrastructure through an exposed DNS zone transfer
+- Discover hidden subdomains associated with the target
+- Bypass authentication using SQL injection
+- Execute arbitrary system commands through command injection
+- Achieve remote code execution as the `www-data` user
+- Abuse a writable Laravel scheduled task executed by `root`
+- Obtain a fully interactive shell running with `root` privileges
+
+With root-level access, an attacker would have complete administrative control over the server, including the ability to access sensitive data, modify configurations, maintain persistence, or deploy additional malicious payloads across the environment.
 
 
+---
+
+
+## 🛡️ Mitigation
+
+Several security measures could prevent the attack path demonstrated in this machine:
+
+- Restrict DNS zone transfers (AXFR) to trusted name servers only
+- Disable unnecessary DNS information disclosure
+- Implement parameterized queries to prevent SQL injection vulnerabilities
+- Properly sanitize and validate user input to prevent command injection
+- Restrict access to administrative interfaces and sensitive subdomains
+- Apply the principle of least privilege to web application service accounts
+- Prevent unprivileged users from modifying scripts executed by privileged accounts
+- Monitor and audit scheduled tasks such as cron jobs
+- Implement outbound traffic restrictions to reduce the risk of reverse shell payloads
+
+🔒 Applying these controls would significantly reduce the risk of remote code execution and privilege escalation attacks.
 
 
 
