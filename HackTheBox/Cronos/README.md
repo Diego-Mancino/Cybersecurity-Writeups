@@ -31,7 +31,7 @@ The attack path involved abusing a DNS zone transfer vulnerability to discover h
 An initial Nmap scan was performed against the target system to identify open ports and running services.
 
 ```bash
-nmap -sC -sV -T4 <TARGET-IP>
+nmap -sC -sV -T4 10.129.227.211
 ```
 
 <img src="images/nmap.png" width="600">
@@ -57,7 +57,7 @@ Additionally, the Apache web server running on port `80/tcp` suggested that furt
 Since the DNS service exposed on port `53/tcp` appeared to be running ISC BIND, a DNS zone transfer attempt was performed in order to enumerate potential subdomains associated with the target.
 
 ```bash
-dig axfr @<TARGET-IP> cronos.htb
+dig axfr @10.129.227.211 cronos.htb
 ```
 
 <img src="images/dig.png" width="600">
@@ -70,7 +70,7 @@ The zone transfer was successful and revealed several hostnames, including:
 In order to access the discovered virtual host was added to the attacker's `/etc/hosts` file for local name resolution:
 
 ```text
-<TARGET-IP> admin.cronos.htb
+10.129.227.211 admin.cronos.htb
 ```
 
 After browsing to `http://admin.cronos.htb`, a login panel was discovered.
