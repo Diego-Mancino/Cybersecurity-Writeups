@@ -3,7 +3,7 @@
 ---
 
 ![Platform](https://img.shields.io/badge/Platform-HackTheBox-green)
-![Difficulty](https://img.shields.io/badge/Difficulty-Easy-orange)
+![Difficulty](https://img.shields.io/badge/Difficulty-Medium-orange)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![OS](https://img.shields.io/badge/OS-Linux-blue)
 
@@ -34,6 +34,9 @@ An initial Nmap scan was performed against the target system to identify open po
 nmap -sC -sV -T4 <TARGET-IP>
 ```
 
+<img src="images/nmap.png" width="600">
+
+
 The scan identified several exposed services:
 
 - `SSH (22/tcp)` running OpenSSH
@@ -57,6 +60,9 @@ Since the DNS service exposed on port `53/tcp` appeared to be running ISC BIND, 
 dig axfr @<TARGET-IP> cronos.htb
 ```
 
+<img src="images/dig.png" width="600">
+
+
 The zone transfer was successful and revealed several hostnames, including:
 
 - `admin.cronos.htb`
@@ -70,6 +76,9 @@ In order to access the discovered virtual host was added to the attacker's `/etc
 After browsing to `http://admin.cronos.htb`, a login panel was discovered.
 
 
+<img src="images/login.png" width="600">
+
+
 ---
 
 
@@ -81,6 +90,9 @@ Authentication testing revealed that the login functionality was vulnerable to S
 ```sql
 admin' or '1'='1
 ```
+
+<img src="images/sql.png" width="600">
+
 
 The payload successfully bypassed authentication, granting access to the administrative panel.
 
@@ -103,6 +115,10 @@ Command execution was confirmed by injecting additional shell commands into the 
 8.8.8.8 ; whoami
 ```
 
+
+<img src="images/whoami.png" width="600">
+
+
 The application returned:
 
 ```text
@@ -111,7 +127,14 @@ www-data
 
 confirming that arbitrary commands were being executed on the server as the `www-data` user.
 
-### 🔹 Enumerating the Server
+
+---
+
+
+## ⬆️ Privilege Escalation
+
+### 🔹 Post-Exploitation Enumeration
+
 
 Post-exploitation enumeration revealed a scheduled task configured to execute the Laravel `artisan` script as the `root` user every minute.
 
@@ -121,11 +144,20 @@ The cronjob configuration contained the following entry:
 * * * * * root php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1
 ```
 
+
+<img src="images/phpfile.png" width="600">
+
+
+
 Additional enumeration showed that the `artisan` file was writable by the `www-data` user:
 
 ```text
 -rwxr-xr-x 1 www-data www-data /var/www/laravel/artisan
 ```
+
+
+<img src="images/artisan.png" width="600">
+
 
 This created a privilege escalation opportunity, since modifying the contents of the script would result in arbitrary code execution as `root`.
 
@@ -154,6 +186,9 @@ Privilege escalation was confirmed using:
 ```bash
 whoami
 ```
+
+<img src="images/root.png" width="600">
+
 
 which returned:
 
