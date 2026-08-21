@@ -184,7 +184,8 @@ exploit/windows/local/ms10_015_kitrap0d
 
 
 
-The `local_exploit_suggester` module identified `MS10-015 KiTrap0D` as a viable privilege escalation vector based on the target operating system version and the presence of vulnerable system components.
+The local_exploit_suggester module identified MS10-015 (KiTrap0D) as a potentially applicable privilege escalation vector for the target system.
+
 
 The exploit module was configured using the existing Meterpreter session:
 
