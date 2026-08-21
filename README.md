@@ -44,7 +44,7 @@ A focused web security lab demonstrating an Insecure Direct Object Reference (ID
 
 ➡️ [View IDOR Write-up](./PortSwigger/IDOR/)
 
-> **More featured projects coming soon:** currently expanding the portfolio with Active Directory and Windows domain security labs.
+Currently expanding the portfolio with Active Directory and Windows domain security labs.
 
 ---
 
@@ -92,7 +92,7 @@ Nmap · Gobuster · Nikto · enum4linux · smbclient · dig
 
 ### Web Application Security
 
-Burp Suite · SQLmap · curl
+Burp Suite · SQLmap
 
 ### Exploitation & Credential Testing
 
