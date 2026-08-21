@@ -112,7 +112,7 @@ Accessing this directory in the browser showed that it was linked to the FTP upl
 http://10.129.140.31/files/ftp/
 ```
 
-The application allowed file uploads without proper validation, suggesting a potential file upload vulnerability that could lead to remote code execution.
+The FTP upload directory was directly exposed through the web server. Because uploaded PHP files were executed by the server, this misconfiguration created a path to remote code execution.
 
 ---
 
@@ -239,7 +239,7 @@ It was observed that the script executes another file located at:
 /etc/print.sh
 ```
 
-This is particularly interesting because it suggests that **print.sh** is executed automatically, likely by a privileged user (root).
+The script appeared to be executed automatically in a privileged context.
 
 Further inspection of the file permissions showed that the **lennie** user has write access to **/etc/print.sh**, which presents an opportunity for privilege escalation.
 
@@ -255,7 +255,7 @@ A listener was then started on the attacker machine:
 nc -lvnp 4445
 ```
 
-Once the script was executed automatically by the system, a reverse shell was received with root privileges.
+After modifying the writable script, its subsequent privileged execution resulted in a reverse shell with root privileges.
 
 ![root](images/root.png)
 
