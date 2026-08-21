@@ -10,7 +10,29 @@
 
 🔗 [TryHackMe Room - Startup](https://tryhackme.com/room/startup)
 
+--- 
 
+
+## 📌 Overview
+
+| Field | Details |
+|---|---|
+| Platform | TryHackMe |
+| Operating System | Linux |
+| Focus | Enumeration, Web Exploitation, Network Traffic Analysis, Privilege Escalation |
+| Key Techniques | Anonymous FTP, Writable Web Directory, PHP RCE, PCAP Analysis, Credential Discovery, Privileged Script Abuse |
+| Tools | Nmap, FTP, Gobuster, Netcat, Wireshark |
+
+
+---
+
+
+## 🧭 Attack Path
+
+**Service Enumeration → Anonymous FTP → Writable Web Directory → PHP Remote Code Execution → PCAP Discovery → Wireshark Analysis → Credential Disclosure → User Access → Privileged Script Abuse → Root**
+
+
+---
 
 
 ## 📖 Introduction
