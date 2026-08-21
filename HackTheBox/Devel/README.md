@@ -1,4 +1,4 @@
-# 🖥️ Hack The Box - Devel Writeup
+# 🖥️ Hack The Box - Devel | Windows Penetration Testing
 
 ---
 
@@ -12,6 +12,28 @@
 </p>
 
 🔗 [Hack The Box Machine - Devel](https://app.hackthebox.com/machines/Devel?sort_by=created_at&sort_type=desc)
+
+
+---
+
+
+## 📌 Overview
+
+| Field | Details |
+|---|---|
+| Platform | Hack The Box |
+| Operating System | Windows |
+| Difficulty | Easy |
+| Focus | Service Enumeration, File Upload, Remote Code Execution, Windows Privilege Escalation |
+| Key Techniques | Anonymous FTP, IIS Web Root Abuse, ASPX Payload Execution, Local Privilege Escalation |
+| Tools | Nmap, FTP, msfvenom, Metasploit |
+
+## 🧭 Attack Path
+
+**Service Enumeration → Anonymous FTP → IIS Web Root Access → ASPX Payload Upload → Remote Code Execution → Local Privilege Escalation → SYSTEM**
+
+
+---
 
 
 ## 📖 Introduction
@@ -203,7 +225,20 @@ Anonymous FTP access exposed the IIS web root directory, allowing arbitrary ASPX
 
 Devel highlights the risks associated with improperly configured file transfer services, executable web content, and unpatched Windows systems exposed to untrusted networks.
 
+
 ---
+
+
+## 🧠 Key Takeaways
+
+- Anonymous write access to a directory served by a web server can turn a simple service misconfiguration into remote code execution.
+- Initial compromise does not always require a complex software vulnerability; insecure service configuration may be enough to obtain a foothold.
+- Outdated and unpatched systems can allow a low-privileged compromise to escalate into full SYSTEM access.
+- Automated exploitation tools are most useful when combined with system enumeration and validation of the target conditions.
+
+
+---
+
 
 ## ⚠️ Impact
 
@@ -225,13 +260,13 @@ With SYSTEM-level privileges, an attacker would have complete administrative con
 
 Several security measures could prevent the attack path demonstrated in this machine:
 
-- Disable anonymous authentication on FTP services
-- Restrict write permissions to web-accessible directories
-- Prevent execution of uploaded files within the web root
-- Remove or disable unnecessary services such as FTP when not required
-- Keep Windows systems fully patched and updated against known privilege escalation vulnerabilities
-- Implement proper network segmentation and least privilege principles
-- Monitor suspicious file uploads and outbound reverse shell connections
+- Disable anonymous FTP access unless strictly required.
+- Prevent FTP users from writing files directly into the IIS web root.
+- Restrict execution of user-controlled files in web-accessible directories.
+- Apply security patches and maintain supported operating system versions.
+- Apply the principle of least privilege to service accounts.
+- Segment exposed services and restrict unnecessary network access.
+- Monitor web directories for unauthorized file uploads or modifications.
 
 Applying these controls would significantly reduce the risk of arbitrary file upload, remote code execution, and privilege escalation attacks.
 
