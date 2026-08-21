@@ -1,4 +1,4 @@
-# 🖥️ Hack The Box - Cronos Writeup
+# 🖥️ Hack The Box - Cronos | Linux Penetration Testing
 
 ---
 
@@ -13,7 +13,28 @@
 
 🔗 [Hack The Box Machine - Cronos](https://app.hackthebox.com/machines/Cronos?sort_by=created_at&sort_type=desc)
 
+
 ---
+
+
+## 📌 Overview
+
+| Field | Details |
+|---|---|
+| Platform | Hack The Box |
+| Operating System | Linux |
+| Difficulty | Medium |
+| Focus | Web Security, Enumeration, Privilege Escalation |
+| Key Techniques | DNS Zone Transfer, SQL Injection, Command Injection, Cron Job Abuse |
+| Tools | Nmap, dig, Netcat |
+
+## 🧭 Attack Path
+
+**DNS Enumeration → Zone Transfer → SQL Injection → Authentication Bypass → Command Injection → Remote Code Execution → Cron Job Privilege Escalation → Root**
+
+
+---
+
 
 ## 📖 Introduction
 
@@ -258,6 +279,17 @@ Several security measures could prevent the attack path demonstrated in this mac
 - Prevent unprivileged users from modifying scripts executed by privileged accounts
 - Monitor and audit scheduled tasks such as cronjobs
 - Implement outbound traffic restrictions to reduce the risk of reverse shell payloads
+
+
+---
+
+
+## Key Takeaways
+
+- DNS enumeration can expose additional attack surfaces that are not immediately visible through standard web enumeration.
+- Multiple weaknesses can become significantly more severe when chained together across different layers of a system.
+- Writable files or scripts executed by privileged scheduled tasks can lead to full system compromise.
+- Successful exploitation should always be followed by an assessment of impact and practical remediation measures.
 
 🔒 Applying these controls would significantly reduce the risk of remote code execution and privilege escalation attacks.
 
