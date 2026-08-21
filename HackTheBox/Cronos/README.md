@@ -185,7 +185,7 @@ Additional enumeration showed that the `artisan` file was writable by the `www-d
 ```
 
 
-<img src="images/artisan.png" width="600">
+<img src="images/artisan.png" width="6****00">
 
 
 This created a privilege escalation opportunity, since modifying the contents of the script would result in arbitrary code execution as `root`.
@@ -246,6 +246,17 @@ This machine highlights the risks associated with insecure DNS configurations, v
 ---
 
 
+## 🧠 Key Takeaways
+
+- DNS enumeration can expose additional attack surfaces that are not immediately visible through standard web enumeration.
+- Multiple weaknesses can become significantly more severe when chained together across different layers of a system.
+- Writable files or scripts executed by privileged scheduled tasks can lead to full system compromise.
+- Successful exploitation should always be followed by an assessment of impact and practical remediation measures.
+
+
+---
+
+
 ## ⚠️ Impact
 
 Successful exploitation of the target system resulted in full compromise of the Linux server.
@@ -279,17 +290,6 @@ Several security measures could prevent the attack path demonstrated in this mac
 - Prevent unprivileged users from modifying scripts executed by privileged accounts
 - Monitor and audit scheduled tasks such as cronjobs
 - Implement outbound traffic restrictions to reduce the risk of reverse shell payloads
-
-
----
-
-
-## Key Takeaways
-
-- DNS enumeration can expose additional attack surfaces that are not immediately visible through standard web enumeration.
-- Multiple weaknesses can become significantly more severe when chained together across different layers of a system.
-- Writable files or scripts executed by privileged scheduled tasks can lead to full system compromise.
-- Successful exploitation should always be followed by an assessment of impact and practical remediation measures.
 
 🔒 Applying these controls would significantly reduce the risk of remote code execution and privilege escalation attacks.
 
