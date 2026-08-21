@@ -1,4 +1,30 @@
-# 🔓 Insecure Direct Object Reference (IDOR) - PortSwigger Lab
+# 🔓 PortSwigger — IDOR | Broken Access Control
+
+
+---
+
+
+## 📌 Overview
+
+| Field | Details |
+|---|---|
+| Platform | PortSwigger Web Security Academy |
+| Category | Broken Access Control |
+| Vulnerability | Insecure Direct Object Reference (IDOR) |
+| Focus | Authorization Testing |
+| Tool | Burp Suite |
+
+
+---
+
+
+## 🧭 Attack Path
+
+**Observe Resource Request → Identify Predictable Object Reference → Modify Identifier → Access Unauthorized Resource → Credential Exposure → Account Compromise**
+
+
+---
+
 
 ## 🎯 Objective
 
@@ -34,7 +60,7 @@ When changing the value to 'download-transcript/1.txt', a transcript containing 
 
 Sensitive information from another user's chat transcript was successfully accessed, including login credentials. The application does not verify whether the requested file belongs to the authenticated user.
 
-This demostrates a lack of proper access control, allowing unauthorized users to retrive data that does not belong to them.
+This demonstrates a lack of proper access control, allowing unauthorized users to retrieve data that does not belong to them.
 
 
 ## ⚠️ Impact
@@ -47,17 +73,18 @@ This can lead to credential exposure and potential account compromise.
 ## 🧠 Key Takeaways
 
 - IDOR vulnerabilities occur when applications fail to enforce proper access control
-- Direct object references, such as file names or IDs, should not be trusted
+- Direct object references must always be protected by server-side authorization checks.
 - Sensitive data can be exposed by simply modifying identifiers
 - Proper authorization checks are critical when accessing user-specific resources
 
 
 ## 🛡️ Mitigation
 
-- Implement proper access control checks on all resource requests
-- Ensure that users can only access resources that belong to them
-- Avoid exposing direct object references in URLs when possible
-- Use indirect references or access control mechanisms to protect sensitive data
+- Enforce server-side authorization checks on every request for user-specific resources.
+- Verify that the authenticated user is authorized to access the requested object.
+- Do not rely on unpredictable or hidden identifiers as an access control mechanism.
+- Apply the principle of least privilege when exposing sensitive user data.
+- Perform regular access control testing across endpoints that reference user-owned resources.
 
 
 
