@@ -215,6 +215,12 @@ This inconsistency indicates that the subdomain may be pointing to shared, outda
 
 For portfolio purposes, the specific subdomain, IP address, and external domain have been anonymized.
 
+<p align="center">
+  <img src="Screenshots/nmap-subdomain-infrastructure.png" width="750">
+</p>
+
+*`Nmap` service enumeration of the identified subdomain revealed a different infrastructure profile, including Nginx on AlmaLinux, SSL certificate data associated with an external domain, and HTTP redirection behavior. Public IP information was redacted for portfolio purposes.*
+
 #### Impact
 
 Incorrect or inconsistent subdomain configuration can introduce several risks, including:
