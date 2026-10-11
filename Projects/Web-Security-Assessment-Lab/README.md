@@ -288,6 +288,16 @@ These issues do not necessarily represent a critical vulnerability on their own,
 - Review the overall HTTP security header configuration against current web security best practices
 - Periodically validate headers manually in addition to using automated security scanners
 
+#### Manual Validation
+
+The automated findings were manually verified using `curl` to inspect the HTTP response headers returned by the server.
+
+<p align="center">
+  <img src="Screenshots/curl-header-validation.png" width="700">
+</p>
+
+*Manual validation with `curl` confirmed the HTTP response headers and supported the automated findings identified by Nikto.*
+
 ## Risk Summary
 
 The assessment did not identify any critical vulnerabilities within the defined non-intrusive scope.
