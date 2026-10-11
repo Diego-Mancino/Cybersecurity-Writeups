@@ -97,6 +97,12 @@ The analysis revealed an additional subdomain associated with the organization, 
 
 No publicly exposed users or employee email addresses were identified during this phase.
 
+<p align="center">
+  <img src="Screenshots/theharvester-subdomain-discovery.png" width="650">
+</p>
+
+*theHarvester was used to identify publicly exposed subdomains and related infrastructure associated with the target.*
+
 ### Public Exposure Analysis
 
 Search-engine-based reconnaissance was performed to identify potentially exposed documents, administrative interfaces, or other indexed resources.
