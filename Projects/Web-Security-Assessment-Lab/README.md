@@ -69,6 +69,10 @@ Initial reconnaissance was performed using WHOIS queries to gather publicly avai
 
 The results confirmed that the domain was active and provided useful context for the subsequent enumeration phases.
 
+![WHOIS domain information](Screenshots/whois-domain-information.png)
+
+*WHOIS enumeration used to verify public registration and DNS information associated with the target domain.*
+
 > Specific registration details and infrastructure data have been partially redacted for portfolio purposes.
 
 ### DNS Resolution
