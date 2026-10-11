@@ -63,7 +63,7 @@ Automated findings were manually validated using direct HTTP requests and servic
 
 ## Reconnaissance
 
-### Domain Information
+### Domain Registration & DNS Context
 
 Initial reconnaissance was performed using WHOIS queries to gather publicly available information about the target domain, including registration details, DNS infrastructure, and hosting information.
 
@@ -73,7 +73,7 @@ The results confirmed that the domain was active and provided useful context for
 
 *WHOIS enumeration used to verify public registration and DNS information associated with the target domain.*
 
-> Specific registration details and infrastructure data have been partially redacted for portfolio purposes.
+> Some infrastructure details have been redacted or anonymized for portfolio purposes.
 
 ### DNS Resolution
 
