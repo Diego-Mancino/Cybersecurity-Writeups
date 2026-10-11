@@ -135,6 +135,12 @@ Additional information was also exposed through HTTP headers and publicly access
 
 While technology disclosure is not necessarily a vulnerability by itself, detailed information about software, versions, and components can help an attacker identify relevant attack vectors or known vulnerabilities.
 
+<p align="center">
+  <img src="Screenshots/whatweb-fingerprinting.png" width="750">
+</p>
+
+*WhatWeb fingerprinting identified the target's web stack, including Apache, WordPress, jQuery, WPBakery, Slider Revolution, and additional HTTP metadata. Public IP addresses and email information were redacted for portfolio purposes.*
+
 #### Impact
 
 Exposing detailed information about the technology stack may facilitate further reconnaissance by allowing an attacker to:
