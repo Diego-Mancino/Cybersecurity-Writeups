@@ -261,6 +261,12 @@ The findings were later manually validated using `curl`, confirming that the hea
 
 This manual verification helped reduce the possibility of relying exclusively on automated scanner output.
 
+<p align="center">
+  <img src="Screenshots/nikto-security-headers.png" width="750">
+</p>
+
+*`Nikto` identified several missing HTTP security headers, including `X-Frame-Options`, `Strict-Transport-Security`, and `X-Content-Type-Options`. Public IP information was redacted for portfolio purposes.*
+
 #### Impact
 
 Missing HTTP security headers can weaken the browser-side security posture of a web application.
