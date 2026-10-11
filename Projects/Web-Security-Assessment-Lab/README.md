@@ -139,7 +139,7 @@ While technology disclosure is not necessarily a vulnerability by itself, detail
   <img src="Screenshots/whatweb-fingerprinting.png" width="750">
 </p>
 
-*WhatWeb fingerprinting identified the target's web stack, including Apache, WordPress, jQuery, WPBakery, Slider Revolution, and additional HTTP metadata. Public IP addresses and email information were redacted for portfolio purposes.*
+*WhatWeb fingerprinting identified the target's web stack, including Apache, WordPress, jQuery, WPBakery, Slider Revolution, and additional HTTP metadata. Public IP and email information were redacted for portfolio purposes.*
 
 #### Impact
 
@@ -173,6 +173,12 @@ The remaining scanned ports were filtered, indicating that network-level access 
 An inconsistency was also observed in the web server identification results. While `Nmap` identified the exposed service as `nginx`, other tools such as WhatWeb and manual HTTP header validation indicated the presence of Apache.
 
 This behavior may suggest the use of a reverse proxy, load balancer, or layered web architecture in which different components are visible depending on the point of observation.
+
+<p align="center">
+  <img src="Screenshots/nmap-web-services.png" width="700">
+</p>
+
+*`Nmap` service enumeration confirmed that only HTTP (80/tcp) and HTTPS (443/tcp) were publicly exposed. The target IP address was redacted for portfolio purposes.*
 
 #### Impact
 
