@@ -81,6 +81,10 @@ DNS resolution was analyzed using `nslookup` to identify the IPv4 and IPv6 addre
 
 This information was used to correlate the web-facing infrastructure with later service enumeration and technology fingerprinting results.
 
+![DNS resolution with nslookup](Screenshots/dns-resolution.png)
+
+*DNS resolution used to identify the target's public IPv4 and IPv6 infrastructure.*
+
 ### Asset and Subdomain Discovery
 
 `theHarvester` was used to identify publicly exposed assets related to the target.
