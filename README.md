@@ -31,6 +31,18 @@ A defensive security project focused on hardening a Windows Server 2022 Domain C
 
 
 
+### 🔹 Nessus Vulnerability Assessment — Metasploitable2 Lab
+
+**Vulnerability Assessment | Nessus | CVSS | Risk Prioritization | Remediation**
+
+A hands-on vulnerability assessment performed with Nessus Essentials against Metasploitable2 in an isolated lab environment. The project compares basic and advanced scan configurations, reviews findings by severity and technical impact, prioritizes high-risk vulnerabilities, and documents remediation recommendations.
+
+➡️ [View Nessus Vulnerability Assessment Lab](./Projects/Nessus-Vulnerability-Assessment-Lab/)
+
+
+---
+
+
 ### 🔹 Hack The Box — Cronos
 
 **Linux | DNS Enumeration | SQL Injection | Command Injection | Privilege Escalation**
@@ -55,6 +67,10 @@ A Windows penetration testing scenario involving anonymous FTP access to an IIS 
 
 ➡️ [View Devel Write-up](./HackTheBox/Devel/)
 
+
+---
+
+
 ### 🔹 PortSwigger — IDOR
 
 **Web Application Security | Broken Access Control | Authorization**
@@ -65,7 +81,9 @@ A focused web security lab demonstrating an Insecure Direct Object Reference (ID
 
 Currently expanding the portfolio with Active Directory and Windows domain security labs.
 
+
 ---
+
 
 ## 📂 Repository Contents
 
@@ -75,11 +93,15 @@ Penetration testing labs covering Linux and Windows systems, web exploitation, s
 
 ➡️ [Browse Hack The Box Write-ups](./HackTheBox/)
 
+---
+
 ### TryHackMe
 
 Hands-on security labs covering network enumeration, web security, Linux exploitation, credential discovery, traffic analysis, and privilege escalation.
 
 ➡️ [Browse TryHackMe Write-ups](./TryHackMe/)
+
+---
 
 ### PortSwigger Web Security Academy
 
@@ -87,11 +109,17 @@ Focused web application security labs covering common vulnerabilities and weakne
 
 ➡️ [Browse PortSwigger Write-ups](./PortSwigger/)
 
+---
+
 ### Technical Projects
 
-Hands-on cybersecurity projects focused on security assessment, system hardening, Active Directory, databases, network security, and defensive monitoring.
+Hands-on cybersecurity projects focused on vulnerability assessment, system hardening, security analysis, and defensive security.
 
-➡️ [Browse Technical Projects](./Projects/)
+- [Authorized Web Security Assessment — INTECSSA](./Projects/Web-Security-Assessment-Lab/)
+- [Windows Server 2022 Hardening — Defensive Security Lab](./Projects/Windows-Server-2022-Hardening-Lab/)
+- [Nessus Vulnerability Assessment — Metasploitable2 Lab](./Projects/Nessus-Vulnerability-Assessment-Lab/)
+
+➡️ [Browse all Technical Projects](./Projects/)
 
 ---
 
