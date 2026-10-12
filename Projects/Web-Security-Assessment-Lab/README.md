@@ -119,7 +119,7 @@ The assessment identified several configuration weaknesses and information discl
 
 ### Finding 1 — Technology and System Information Disclosure
 
-**Severity:** Medium
+**Severity:** Low
 
 #### Description
 
@@ -159,7 +159,7 @@ Exposing detailed information about the technology stack may facilitate further 
 
 ### Finding 2 — Exposed Web Services
 
-**Severity:** Low
+**Severity:** Informational
 
 #### Description
 
@@ -198,7 +198,7 @@ The discrepancy between identified server technologies may also indicate the pre
 
 ### Finding 3 — Subdomain Misconfiguration and External Infrastructure
 
-**Severity:** Medium
+**Severity:** Low
 
 #### Description
 
@@ -306,9 +306,9 @@ However, several security weaknesses and configuration issues were identified ac
 
 | Finding | Severity |
 |---|---|
-| Technology and System Information Disclosure | Medium |
+| Technology and System Information Disclosure | Low |
 | Exposed Web Services | Low |
-| Subdomain Misconfiguration and External Infrastructure | Medium |
+| Subdomain Misconfiguration and External Infrastructure | Low |
 | Missing HTTP Security Headers | Medium |
 
 Overall, the environment presents a **moderate level of exposure**, primarily related to web-facing services, infrastructure consistency, and security hardening.
