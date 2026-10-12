@@ -8,6 +8,21 @@ The server was configured as a Domain Controller and reviewed from a defensive s
 
 The hardening process included Microsoft Defender configuration, Windows Update, firewall review, password policy analysis, Remote Desktop hardening, and security auditing.
 
+## Contents
+
+- [Scope](#scope)
+- [Lab Environment](#lab-environment)
+- [Initial Security Baseline](#initial-security-baseline)
+- [Microsoft Defender Hardening](#microsoft-defender-hardening)
+- [Windows Update & Patch Management](#windows-update--patch-management)
+- [Windows Defender Firewall Hardening](#windows-defender-firewall-hardening)
+- [Password Policy Review](#password-policy-review)
+- [Remote Desktop Protocol Hardening](#remote-desktop-protocol-rdp-hardening)
+- [Security Audit Policy Configuration](#security-audit-policy-configuration)
+- [Hardening Summary](#hardening-summary)
+- [Conclusion](#conclusion)
+- [Lessons Learned](#lessons-learned)
+
 ## Scope
 
 The project focused on reviewing and improving the security posture of a Windows Server 2022 system.
@@ -58,7 +73,7 @@ The initial review identified the following relevant conditions:
 
 - Microsoft Defender Firewall was enabled for the domain profile
 - Remote management was enabled
-- Remote Desktop was disabled at the initial review stage
+- Remote Desktop configuration was reviewed as part of the baseline
 - Real-time Microsoft Defender Antivirus protection was enabled
 - Windows Update had pending updates
 - Internet Explorer Enhanced Security Configuration was enabled
