@@ -159,7 +159,7 @@ This included:
 - Malware removal tool updates
 
 <p align="center">
-  <img src="Screeshots/windows-update-progress.png" width="550">
+  <img src="Screeshots/windows-update-progress.png" width="650">
 </p>
 
 *Windows Update applying security intelligence, cumulative system, and .NET Framework updates as part of the server hardening process.*
