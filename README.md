@@ -12,6 +12,16 @@ My goal is not only to document successful exploitation, but to demonstrate the 
 
 Selected write-ups highlighting different areas of offensive security and penetration testing.
 
+
+### 🔹 Authorized Web Security Assessment — INTECSSA
+
+**Web Security Assessment | Reconnaissance | Service Enumeration | Technology Fingerprinting | Risk Analysis**
+
+An authorized, non-intrusive assessment of INTECSSA's public-facing web environment, covering passive reconnaissance, asset discovery, service enumeration, technology fingerprinting, HTTP security configuration review, manual validation, risk assessment, and remediation recommendations.
+
+➡️ [View Web Security Assessment](./Projects/Web-Security-Assessment-Lab/)
+
+
 ### 🔹 Hack The Box — Cronos
 
 **Linux | DNS Enumeration | SQL Injection | Command Injection | Privilege Escalation**
@@ -67,6 +77,12 @@ Hands-on security labs covering network enumeration, web security, Linux exploit
 Focused web application security labs covering common vulnerabilities and weaknesses in authentication, authorization, and server-side functionality.
 
 ➡️ [Browse PortSwigger Write-ups](./PortSwigger/)
+
+### Technical Projects
+
+Hands-on cybersecurity projects focused on security assessment, system hardening, Active Directory, databases, network security, and defensive monitoring.
+
+➡️ [Browse Technical Projects](./Projects/)
 
 ---
 
