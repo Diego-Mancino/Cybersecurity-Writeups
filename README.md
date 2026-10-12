@@ -10,8 +10,7 @@ My goal is not only to document successful exploitation, but to demonstrate the 
 
 ## ⭐ Featured Projects
 
-Selected write-ups highlighting different areas of offensive security and penetration testing.
-
+Selected projects and write-ups highlighting offensive security, vulnerability assessment, system hardening, and hands-on cybersecurity practice.
 
 ### 🔹 Authorized Web Security Assessment — INTECSSA
 
