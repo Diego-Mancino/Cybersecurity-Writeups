@@ -159,7 +159,7 @@ This included:
 - Malware removal tool updates
 
 <p align="center">
-  <img src="Screeshots/windows-update-progress.png" width="450">
+  <img src="Screeshots/windows-update-progress.png" width="550">
 </p>
 
 *Windows Update applying security intelligence, cumulative system, and .NET Framework updates as part of the server hardening process.*
@@ -195,7 +195,7 @@ The following configuration was verified across the active profiles:
 This configuration helps reduce unnecessary network exposure by preventing unsolicited inbound traffic unless explicitly permitted by a firewall rule.
 
 <p align="center">
-  <img src="Screeshots/firewall-advanced-profiles.png" width="450">
+  <img src="Screeshots/firewall-advanced-profiles.png" width="550">
 </p>
 
 *Windows Defender Firewall advanced settings showing active Domain, Private, and Public profiles, with unsolicited inbound connections blocked by default and outbound traffic allowed.*
