@@ -30,7 +30,7 @@ Out of scope:
 - Privilege escalation
 - Any activity that could affect service availability
 
-For portfolio purposes, specific IP addresses, email addresses, subdomains, and other infrastructure details have been redacted or anonymized.
+Selected IP addresses, email information, third-party domains, and other infrastructure details have been redacted or anonymized for portfolio purposes.
 
 ## Methodology
 
@@ -216,7 +216,7 @@ This inconsistency indicates that the subdomain may be pointing to shared, outda
 For portfolio purposes, the specific subdomain, IP address, and external domain have been anonymized.
 
 <p align="center">
-  <img src="Screenshots/nmap-subdomain-infraestructure.png" width="750">
+  <img src="Screenshots/nmap-subdomain-infrastructure.png" width="750">
 </p>
 
 *`Nmap` service enumeration of the identified subdomain revealed a different infrastructure profile, including Nginx on AlmaLinux, SSL certificate data associated with an external domain, and HTTP redirection behavior. Public IP information was redacted for portfolio purposes.*
@@ -320,7 +320,7 @@ The most relevant areas for improvement are:
 - Strengthening HTTP security headers
 - Continuing to limit publicly exposed services to only those strictly required
 
-No evidence of a critical compromise path was identified within the authorized scope of the assessment.
+No critical vulnerabilities were identified within the authorized, non-intrusive scope of the assessment.
 
 ## Conclusion
 
