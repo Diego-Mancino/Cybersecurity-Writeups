@@ -68,7 +68,7 @@ The review included the following areas:
 - General server security posture
 
 <p align="center">
-  <img src="Screenshots/initial-security-baseline.png" width="800">
+  <img src="./Screenshots/initial-security-baseline.png" width="800">
 </p>
 
 *Initial Windows Server 2022 baseline review showing the server role, firewall status, remote management configuration, update state, and other security-relevant settings.*
