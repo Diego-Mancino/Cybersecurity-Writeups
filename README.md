@@ -22,6 +22,16 @@ An authorized, non-intrusive assessment of INTECSSA's public-facing web environm
 ➡️ [View Web Security Assessment](./Projects/Web-Security-Assessment-Lab/)
 
 
+### 🔹 Windows Server 2022 Hardening — Defensive Security Lab
+
+**Windows Server | Hardening | Microsoft Defender | Firewall | RDP | Security Auditing**
+
+A defensive security project focused on hardening a Windows Server 2022 Domain Controller by reviewing the initial security baseline and strengthening endpoint protection, patch management, firewall configuration, password policies, Remote Desktop exposure, and audit logging.
+
+➡️ [View Windows Server 2022 Hardening Lab](./Projects/Windows-Server-2022-Hardening-Lab/)
+
+
+
 ### 🔹 Hack The Box — Cronos
 
 **Linux | DNS Enumeration | SQL Injection | Command Injection | Privilege Escalation**
