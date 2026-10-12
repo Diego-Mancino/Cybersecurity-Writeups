@@ -126,7 +126,7 @@ After the hardening process:
 This configuration improved the server's endpoint protection posture and reduced the possibility of unauthorized modification of security controls.
 
 <p align="center">
-  <img src="Screeshots/defender-hardened-state.png" width="750">
+  <img src="Screeshots/defender-hardened-state.png" width="400">
 </p>
 
 *Post-hardening Microsoft Defender configuration showing real-time protection, cloud-delivered protection, automatic sample submission, and Tamper Protection enabled.*
@@ -159,7 +159,7 @@ This included:
 - Malware removal tool updates
 
 <p align="center">
-  <img src="Screeshots/windows-update-progress.png" width="800">
+  <img src="Screeshots/windows-update-progress.png" width="450">
 </p>
 
 *Windows Update applying security intelligence, cumulative system, and .NET Framework updates as part of the server hardening process.*
@@ -195,7 +195,7 @@ The following configuration was verified across the active profiles:
 This configuration helps reduce unnecessary network exposure by preventing unsolicited inbound traffic unless explicitly permitted by a firewall rule.
 
 <p align="center">
-  <img src="Screeshots/firewall-advanced-profiles.png" width="800">
+  <img src="Screeshots/firewall-advanced-profiles.png" width="450">
 </p>
 
 *Windows Defender Firewall advanced settings showing active Domain, Private, and Public profiles, with unsolicited inbound connections blocked by default and outbound traffic allowed.*
@@ -254,7 +254,7 @@ The server configuration showed that:
 Although NLA provides an additional security layer, an enabled RDP service still increases the server's exposed attack surface.
 
 <p align="center">
-  <img src="Screeshots/rdp-initial-state.png" width="700">
+  <img src="Screeshots/rdp-initial-state.png" width="400">
 </p>
 
 *Initial Remote Desktop configuration showing RDP enabled with Network Level Authentication (NLA) active before the service was disabled as part of the hardening process.*
