@@ -1,4 +1,4 @@
-# Web Security Assessment Lab
+# Authorized Web Security Assessment — INTECSSA
 
 ## Overview
 
@@ -7,6 +7,18 @@ This project documents an authorized, non-intrusive web security assessment perf
 The assessment focused on reconnaissance, service enumeration, technology fingerprinting, HTTP security headers, public asset exposure, and risk analysis.
 
 No denial-of-service testing, destructive exploitation, or intrusive attacks were performed.
+
+
+## Contents
+
+- [Scope](#scope)
+- [Methodology](#methodology)
+- [Reconnaissance](#reconnaissance)
+- [Analysis & Findings](#analysis--findings)
+- [Risk Summary](#risk-summary)
+- [Conclusion](#conclusion)
+- [Lessons Learned](#lessons-learned)
+
 
 ## Scope
 
@@ -32,6 +44,7 @@ Out of scope:
 
 Selected IP addresses, email information, third-party domains, and other infrastructure details have been redacted or anonymized for portfolio purposes.
 
+
 ## Methodology
 
 The assessment followed a structured, non-intrusive methodology based on common penetration testing phases.
@@ -51,6 +64,7 @@ The exposed web services were analyzed for security configuration weaknesses, in
 ### 5. Manual Validation
 Automated findings were manually validated using direct HTTP requests and service inspection in order to reduce false positives and confirm the accuracy of the results.
 
+
 ### Tools Used
 
 - WHOIS
@@ -60,6 +74,7 @@ Automated findings were manually validated using direct HTTP requests and servic
 - Nmap
 - Nikto
 - curl
+
 
 ## Reconnaissance
 
@@ -77,6 +92,7 @@ The results confirmed that the domain was active and provided useful context for
 
 > Some infrastructure details have been redacted or anonymized for portfolio purposes.
 
+
 ### DNS Resolution
 
 DNS resolution was analyzed using `nslookup` to identify the IPv4 and IPv6 addresses associated with the target.
@@ -88,6 +104,7 @@ This information was used to correlate the web-facing infrastructure with later 
 </p>
 
 *DNS resolution used to identify the target's public IPv4 and IPv6 infrastructure.*
+
 
 ### Asset and Subdomain Discovery
 
@@ -103,11 +120,13 @@ No publicly exposed users or employee email addresses were identified during thi
 
 *theHarvester was used to identify publicly exposed subdomains and related infrastructure associated with the target.*
 
+
 ### Public Exposure Analysis
 
 Search-engine-based reconnaissance was performed to identify potentially exposed documents, administrative interfaces, or other indexed resources.
 
 No sensitive documents, administrative panels, or critical information were identified through these searches.
+
 
 ## Analysis & Findings
 
@@ -157,6 +176,10 @@ Exposing detailed information about the technology stack may facilitate further 
 - Review HTTP headers and metadata for unnecessary information exposure
 - Apply secure configuration practices to reduce fingerprinting opportunities
 
+
+---
+
+
 ### Finding 2 — Exposed Web Services
 
 **Severity:** Informational
@@ -195,6 +218,10 @@ The discrepancy between identified server technologies may also indicate the pre
 - Ensure exposed web services remain updated and securely configured
 - Review the web architecture to confirm whether reverse proxy or load balancing components are in use
 - Maintain accurate documentation of externally exposed infrastructure
+
+
+---
+
 
 ### Finding 3 — Subdomain Misconfiguration and External Infrastructure
 
@@ -242,6 +269,10 @@ Although no direct exploitation was performed, the configuration inconsistency i
 - Remove obsolete or unused DNS records
 - Maintain a centralized inventory of public domains, subdomains, certificates, and external dependencies
 - Periodically review externally hosted assets for configuration drift
+
+
+---
+
 
 ### Finding 4 — Missing HTTP Security Headers
 
@@ -298,6 +329,10 @@ The automated findings were manually verified using `curl` to inspect the HTTP r
 
 *Manual validation with `curl` confirmed the HTTP response headers and supported the automated findings identified by Nikto.*
 
+
+---
+
+
 ## Risk Summary
 
 The assessment did not identify any critical vulnerabilities within the defined non-intrusive scope.
@@ -307,7 +342,7 @@ However, several security weaknesses and configuration issues were identified ac
 | Finding | Severity |
 |---|---|
 | Technology and System Information Disclosure | Low |
-| Exposed Web Services | Low |
+| Exposed Web Services | Informational |
 | Subdomain Misconfiguration and External Infrastructure | Low |
 | Missing HTTP Security Headers | Medium |
 
@@ -322,6 +357,7 @@ The most relevant areas for improvement are:
 
 No critical vulnerabilities were identified within the authorized, non-intrusive scope of the assessment.
 
+
 ## Conclusion
 
 This assessment provided a structured review of INTECSSA's publicly exposed web environment using non-intrusive reconnaissance, service enumeration, technology fingerprinting, and configuration analysis.
@@ -332,7 +368,9 @@ No critical vulnerabilities were identified within the authorized scope.
 
 The overall security posture was assessed as **moderate**, with the main recommendations focused on improving infrastructure visibility, strengthening web security configuration, and maintaining consistent management of public-facing assets.
 
+
 ---
+
 
 ## Lessons Learned
 
