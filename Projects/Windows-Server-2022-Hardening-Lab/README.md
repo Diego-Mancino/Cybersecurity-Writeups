@@ -67,6 +67,12 @@ The review included the following areas:
 - Internet Explorer Enhanced Security Configuration
 - General server security posture
 
+<p align="center">
+  <img src="Screenshots/initial-security-baseline.png" width="800">
+</p>
+
+*Initial Windows Server 2022 baseline review showing the server role, firewall status, remote management configuration, update state, and other security-relevant settings.*
+
 ### Baseline Observations
 
 The initial review identified the following relevant conditions:
@@ -95,6 +101,13 @@ The following conditions were observed:
 
 Tamper Protection helps prevent unauthorized changes to important Microsoft Defender security settings, making it an important hardening control.
 
+<p align="center">
+  <img src="Screenshots/defender-initial-state.png" width="750">
+</p>
+
+*Initial Microsoft Defender configuration showing no active threats and Tamper Protection disabled before the hardening process.*
+
+
 ### Hardening Actions
 
 The security configuration was reviewed and additional Microsoft Defender protections were enabled.
@@ -111,6 +124,13 @@ After the hardening process:
 - Tamper Protection was enabled
 
 This configuration improved the server's endpoint protection posture and reduced the possibility of unauthorized modification of security controls.
+
+<p align="center">
+  <img src="Screenshots/defender-hardened-state.png" width="750">
+</p>
+
+*Post-hardening Microsoft Defender configuration showing real-time protection, cloud-delivered protection, automatic sample submission, and Tamper Protection enabled.*
+
 
 ## Windows Update & Patch Management
 
@@ -137,6 +157,12 @@ This included:
 - Cumulative operating system patches
 - .NET Framework updates
 - Malware removal tool updates
+
+<p align="center">
+  <img src="Screenshots/windows-update-progress.png" width="800">
+</p>
+
+*Windows Update applying security intelligence, cumulative system, and .NET Framework updates as part of the server hardening process.*
 
 ### Result
 
@@ -168,6 +194,13 @@ The following configuration was verified across the active profiles:
 
 This configuration helps reduce unnecessary network exposure by preventing unsolicited inbound traffic unless explicitly permitted by a firewall rule.
 
+<p align="center">
+  <img src="Screenshots/firewall-advanced-profiles.png" width="800">
+</p>
+
+*Windows Defender Firewall advanced settings showing active Domain, Private, and Public profiles, with unsolicited inbound connections blocked by default and outbound traffic allowed.*
+
+
 ### Result
 
 The firewall configuration was considered appropriately hardened for the laboratory environment.
@@ -192,6 +225,13 @@ As part of the review, the minimum password length auditing value was configured
 
 This allows administrators to evaluate whether existing passwords meet stronger length requirements and supports future password policy improvements.
 
+<p align="center">
+  <img src="Screenshots/password-policy-audit-length.png" width="650">
+</p>
+
+*Password policy review showing minimum password length auditing configured to 14 characters while the server remained governed by centrally managed password controls.*
+
+
 ### Result
 
 The server remained governed by the higher-level password policy while additional password length auditing was enabled.
@@ -212,6 +252,12 @@ The server configuration showed that:
 - Remote Assistance was disabled
 
 Although NLA provides an additional security layer, an enabled RDP service still increases the server's exposed attack surface.
+
+<p align="center">
+  <img src="Screenshots/rdp-initial-state.png" width="700">
+</p>
+
+*Initial Remote Desktop configuration showing RDP enabled with Network Level Authentication (NLA) active before the service was disabled as part of the hardening process.*
 
 ### Hardening Actions
 
@@ -245,6 +291,13 @@ This limited the server's ability to detect or investigate:
 - Changes to system configuration
 - Suspicious administrative activity
 
+<p align="center">
+  <img src="Screenshots/audit-policy-initial-state.png" width="700">
+</p>
+
+*Initial audit policy configuration showing security events set to “No Auditing,” limiting visibility into authentication activity and system changes.*
+
+
 ### Hardening Actions
 
 Security auditing was enabled to record both successful and failed security events.
@@ -261,6 +314,12 @@ This configuration improves visibility into system activity and provides useful 
 The server was configured to generate security audit events for both successful and failed actions.
 
 Enabling audit logging significantly improved the server's monitoring capabilities and strengthened its overall defensive security posture.
+
+<p align="center">
+  <img src="Screenshots/audit-policy-hardened-state.png" width="700">
+</p>
+
+*Post-hardening audit policy configuration with successful and failed security events enabled to improve monitoring, detection, and incident investigation.*
 
 ## Hardening Summary
 
@@ -316,23 +375,6 @@ This project reinforced several important principles of Windows Server hardening
 - Hardening is most effective when preventive controls and monitoring capabilities are improved together
 
 The project also highlighted that secure system administration is not only about enabling protections, but about understanding which services, permissions, and configurations are actually necessary for the environment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
