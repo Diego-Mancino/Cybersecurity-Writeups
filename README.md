@@ -118,6 +118,7 @@ Hands-on cybersecurity projects focused on vulnerability assessment, system hard
 - [Authorized Web Security Assessment — INTECSSA](./Projects/Web-Security-Assessment-Lab/)
 - [Windows Server 2022 Hardening — Defensive Security Lab](./Projects/Windows-Server-2022-Hardening-Lab/)
 - [Nessus Vulnerability Assessment — Metasploitable2 Lab](./Projects/Nessus-Vulnerability-Assessment-Lab/)
+- [Network Vulnerability Detection & Traffic Analysis — Nmap, NSE & Wireshark](./Projects/Nmap-Wireshark-Network-Security-Lab/)
 
 ➡️ [Browse all Technical Projects](./Projects/)
 
