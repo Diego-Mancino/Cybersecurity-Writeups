@@ -44,6 +44,13 @@ The assessment was conducted in an isolated VirtualBox environment using two vir
 | Kali Linux | Security assessment workstation | `192.168.100.50` | Host-Only + Bridged Adapter |
 | Metasploitable2 | Vulnerable target system | `192.168.100.100` | Host-Only |
 
+<p align="center">
+  <img src="./Screenshots/kali-network-interface.png" width="45%">
+  <img src="./Screenshots/metasploitable2-network-interface.png" width="45%">
+</p>
+
+*Lab network configuration showing Kali Linux at `192.168.100.50` and Metasploitable2 at `192.168.100.100` on the isolated Host-Only network.*
+
 Kali Linux was used to run Nmap, NSE scripts, and Wireshark for reconnaissance, vulnerability detection, and traffic analysis.
 
 Metasploitable2 was used as the intentionally vulnerable target system.
@@ -74,6 +81,12 @@ The first stage of the assessment focused on identifying the exposed TCP attack 
 
 A full TCP SYN scan was performed against `192.168.100.100` to enumerate all open ports across the complete TCP port range.
 
+<p align="center">
+  <img src="./Screenshots/full-tcp-port-scan.png" width="650">
+</p>
+
+*Full TCP SYN scan of the Metasploitable2 target showing the exposed attack surface across the complete TCP port range.*
+
 The scan revealed numerous exposed services, confirming that the target presented a broad attack surface suitable for further service enumeration and vulnerability analysis.
 
 Rather than immediately performing aggressive vulnerability checks against every port, the results were used to select relevant services for deeper inspection in the following stages.
@@ -82,6 +95,19 @@ Rather than immediately performing aggressive vulnerability checks against every
 ## OS & Service Detection
 
 After identifying the exposed TCP ports, targeted service and version detection was performed against the most relevant services.
+
+<p align="center">
+  <img src="./Screenshots/service-version-enumeration.png" width="800">
+</p>
+
+<p align="center">
+  <img src="./Screenshots/smb-os-discovery.png" width="650">
+</p>
+
+*Targeted SMB discovery with Nmap NSE identifying the Metasploitable2 host, Samba version, computer name, domain, and FQDN.*
+
+*Targeted Nmap service and version enumeration showing exposed services and software versions on the Metasploitable2 host.*
+
 
 Nmap identified multiple network services and software versions, including:
 
@@ -105,6 +131,12 @@ After identifying potentially vulnerable services, targeted Nmap NSE scripts wer
 The FTP service on port `21` was identified as running **vsFTPd 2.3.4**, a version known to contain a backdoor.
 
 A dedicated NSE check was performed using the `ftp-vsftpd-backdoor` script.
+
+<p align="center">
+  <img src="./Screenshots/vsftpd-backdoor-nse.png" width="750">
+</p>
+
+*Targeted Nmap NSE validation confirming that the FTP service is running vulnerable vsFTPd 2.3.4 and is affected by CVE-2011-2523.*
 
 The script confirmed that the service was vulnerable and reported successful interaction with the backdoor, demonstrating the potential for remote command execution with root privileges.
 
@@ -135,6 +167,12 @@ FTP traffic captured with Wireshark showed that authentication data was transmit
 
 By filtering the capture for FTP traffic, the `USER` and `PASS` commands could be observed directly in the packet contents.
 
+<p align="center">
+  <img src="./Screenshots/ftp-cleartext-credentials.png" width="850">
+</p>
+
+*Wireshark capture showing FTP authentication commands (`USER` and `PASS`) transmitted in cleartext between Kali Linux and Metasploitable2.*
+
 This demonstrated that credentials sent through FTP can be exposed to anyone with access to the same network segment.
 
 The analysis confirmed that legacy cleartext protocols significantly increase the risk of credential interception and unauthorized access.
@@ -146,9 +184,28 @@ HTTP traffic captured between Kali Linux and Metasploitable2 was analyzed with W
 
 By filtering the capture for HTTP traffic, requests such as `GET` could be inspected directly, including requested paths and application resources.
 
+<p align="center">
+  <img src="./Screenshots/http-cleartext-traffic.png" width="850">
+</p>
+
+*Wireshark analysis showing unencrypted HTTP requests and responses, including `GET` requests and `200 OK` responses transmitted in cleartext between Kali Linux and Metasploitable2.*
+
 Because the traffic was transmitted in cleartext, Wireshark was also able to identify and export HTTP objects transferred during the session.
 
+<p align="center">
+  <img src="./Screenshots/http-export-objects.png" width="700">
+</p>
+
+*Wireshark HTTP object export view showing recoverable HTML, CSS, JavaScript, and image resources transmitted without encryption.*
+
 A reconstructed image was successfully extracted from the packet capture, demonstrating that unencrypted HTTP traffic can expose complete application content to anyone able to observe the network communication.
+
+<p align="center">
+  <img src="./Screenshots/http-object-reconstructed.png" width="500">
+</p>
+
+*Reconstructed image successfully extracted from unencrypted HTTP traffic captured with Wireshark.*
+
 
 This highlights the importance of using HTTPS to protect both user data and application resources in transit.
 
