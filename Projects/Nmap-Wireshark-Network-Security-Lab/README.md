@@ -156,7 +156,7 @@ Traffic was generated intentionally using several protocols, including:
 The capture was performed on the Host-Only interface used by the isolated laboratory network.
 
 <p align="center">
-  <img src="./Screenshots/wireshark-captured-traffic.png" width="850">
+  <img src="./Screenshots/wireshark-captured-traffic.jpg" width="850">
 </p>
 
 *General Wireshark capture showing ICMP, FTP, HTTP, TCP, and ARP traffic exchanged between Kali Linux and Metasploitable2 inside the isolated lab network.*
