@@ -100,13 +100,13 @@ After identifying the exposed TCP ports, targeted service and version detection 
   <img src="./Screenshots/service-version-enumeration.png" width="800">
 </p>
 
+*Targeted Nmap service and version enumeration showing exposed services and software versions on the Metasploitable2 host.*
+
 <p align="center">
   <img src="./Screenshots/smb-os-discovery.png" width="650">
 </p>
 
 *Targeted SMB discovery with Nmap NSE identifying the Metasploitable2 host, Samba version, computer name, domain, and FQDN.*
-
-*Targeted Nmap service and version enumeration showing exposed services and software versions on the Metasploitable2 host.*
 
 
 Nmap identified multiple network services and software versions, including:
@@ -117,7 +117,6 @@ Nmap identified multiple network services and software versions, including:
 - Samba / SMB services
 - MySQL
 - VNC
-- Apache Tomcat
 
 Additional SMB discovery was performed using Nmap NSE to obtain host and system information from the target.
 
@@ -155,6 +154,12 @@ Traffic was generated intentionally using several protocols, including:
 - HTTP
 
 The capture was performed on the Host-Only interface used by the isolated laboratory network.
+
+<p align="center">
+  <img src="./Screenshots/wireshark-captured-traffic.png" width="850">
+</p>
+
+*General Wireshark capture showing ICMP, FTP, HTTP, TCP, and ARP traffic exchanged between Kali Linux and Metasploitable2 inside the isolated lab network.*
 
 This allowed the communication between both virtual machines to be analyzed without unrelated external network traffic.
 
