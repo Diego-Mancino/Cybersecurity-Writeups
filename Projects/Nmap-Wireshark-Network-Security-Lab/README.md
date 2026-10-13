@@ -45,8 +45,8 @@ The assessment was conducted in an isolated VirtualBox environment using two vir
 | Metasploitable2 | Vulnerable target system | `192.168.100.100` | Host-Only |
 
 <p align="center">
-  <img src="./Screenshots/kali-network-interface.png" width="45%">
-  <img src="./Screenshots/metasploitable2-network-interface.png" width="45%">
+  <img src="./Screenshots/kali-network-interface.jpg" width="45%">
+  <img src="./Screenshots/metasploitable2-network-interface.jpg" width="45%">
 </p>
 
 *Lab network configuration showing Kali Linux at `192.168.100.50` and Metasploitable2 at `192.168.100.100` on the isolated Host-Only network.*
@@ -168,7 +168,7 @@ FTP traffic captured with Wireshark showed that authentication data was transmit
 By filtering the capture for FTP traffic, the `USER` and `PASS` commands could be observed directly in the packet contents.
 
 <p align="center">
-  <img src="./Screenshots/ftp-cleartext-credentials.png" width="850">
+  <img src="./Screenshots/ftp-cleartext-credentials.jpg" width="850">
 </p>
 
 *Wireshark capture showing FTP authentication commands (`USER` and `PASS`) transmitted in cleartext between Kali Linux and Metasploitable2.*
@@ -185,7 +185,7 @@ HTTP traffic captured between Kali Linux and Metasploitable2 was analyzed with W
 By filtering the capture for HTTP traffic, requests such as `GET` could be inspected directly, including requested paths and application resources.
 
 <p align="center">
-  <img src="./Screenshots/http-cleartext-traffic.png" width="850">
+  <img src="./Screenshots/http-cleartext-traffic.jpg" width="850">
 </p>
 
 *Wireshark analysis showing unencrypted HTTP requests and responses, including `GET` requests and `200 OK` responses transmitted in cleartext between Kali Linux and Metasploitable2.*
@@ -193,7 +193,7 @@ By filtering the capture for HTTP traffic, requests such as `GET` could be inspe
 Because the traffic was transmitted in cleartext, Wireshark was also able to identify and export HTTP objects transferred during the session.
 
 <p align="center">
-  <img src="./Screenshots/http-export-objects.png" width="700">
+  <img src="./Screenshots/http-export-objects.jpg" width="700">
 </p>
 
 *Wireshark HTTP object export view showing recoverable HTML, CSS, JavaScript, and image resources transmitted without encryption.*
@@ -201,7 +201,7 @@ Because the traffic was transmitted in cleartext, Wireshark was also able to ide
 A reconstructed image was successfully extracted from the packet capture, demonstrating that unencrypted HTTP traffic can expose complete application content to anyone able to observe the network communication.
 
 <p align="center">
-  <img src="./Screenshots/http-object-reconstructed.png" width="500">
+  <img src="./Screenshots/http-object-reconstructed.jpg" width="500">
 </p>
 
 *Reconstructed image successfully extracted from unencrypted HTTP traffic captured with Wireshark.*
