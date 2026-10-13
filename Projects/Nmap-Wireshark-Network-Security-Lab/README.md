@@ -11,6 +11,21 @@ The workflow included full TCP port scanning, targeted service and version enume
 
 The objective was to understand how exposed services and insecure network protocols can increase attack surface, reveal sensitive information, and create opportunities for exploitation.
 
+## Contents
+
+- [Scope](#scope)
+- [Lab Environment](#lab-environment)
+- [Methodology](#methodology)
+- [Network Discovery & Port Scanning](#network-discovery--port-scanning)
+- [OS & Service Detection](#os--service-detection)
+- [NSE Vulnerability Detection](#nse-vulnerability-detection)
+- [Wireshark Traffic Capture](#wireshark-traffic-capture)
+- [Cleartext Credential Exposure](#cleartext-credential-exposure)
+- [HTTP Traffic Analysis & Object Reconstruction](#http-traffic-analysis--object-reconstruction)
+- [Security Findings](#security-findings)
+- [Mitigation Recommendations](#mitigation-recommendations)
+- [Conclusion](#conclusion)
+- [Lessons Learned](#lessons-learned)
 
 
 ## Scope
