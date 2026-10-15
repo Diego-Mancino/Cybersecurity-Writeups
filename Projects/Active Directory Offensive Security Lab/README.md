@@ -215,11 +215,123 @@ This confirmed full administrative access to the Domain Controller and completed
 
 
 
+---
 
 
 
+## Security Findings
+
+The assessment identified several weaknesses that, when combined, enabled full administrative compromise of the Active Directory environment.
+
+### 1. Kerberos Pre-Authentication Disabled on `svc-admin`
+
+The `svc-admin` account was configured without Kerberos pre-authentication, allowing an AS-REP response to be requested without knowing the account password.
+
+This exposed crackable Kerberos material and enabled an offline password attack.
+
+**Impact:** High
+
+### 2. Weak Password on a Privileged Service Account
+
+The AS-REP hash associated with `svc-admin` was successfully cracked using a common wordlist.
+
+This indicated that the account password did not provide sufficient resistance against offline password attacks.
+
+**Impact:** High
+
+### 3. Sensitive Credentials Stored in an Accessible SMB Share
+
+The recovered `svc-admin` credentials provided access to an SMB `backup` share containing `backup_credentials.txt`.
+
+The file stored Base64-encoded credentials for the `backup` domain account. Base64 encoding does not provide encryption or meaningful protection for sensitive information.
+
+**Impact:** Critical
+
+### 4. Excessive Privileges Assigned to the `backup` Account
+
+The recovered `backup` account credentials allowed domain credential material to be extracted from the Domain Controller using the DRSUAPI method.
+
+This exposed NTLM hashes for domain accounts, including `Administrator`.
+
+**Impact:** Critical
+
+### 5. NTLM Hash Reuse Through Pass-the-Hash
+
+The extracted Administrator NTLM hash could be used directly for remote authentication without requiring the plaintext password.
+
+This resulted in successful administrative access to the Domain Controller.
+
+**Impact:** Critical
 
 
+
+---
+
+
+
+## Mitigation Recommendations
+
+The attack chain could be significantly reduced through stronger identity, credential, and access-control practices.
+
+### Kerberos Account Security
+
+- Require Kerberos pre-authentication for all domain accounts unless a documented technical requirement exists.
+- Regularly audit Active Directory for accounts configured with `Do not require Kerberos preauthentication`.
+- Apply strong, unique passwords to service accounts.
+- Consider managed service accounts where appropriate to reduce manual credential management.
+
+### Password Security
+
+- Enforce strong password policies with sufficient length and complexity.
+- Prevent the use of common or previously compromised passwords.
+- Use long, randomly generated passwords for privileged and service accounts.
+- Periodically review privileged credentials and rotate them when necessary.
+
+### SMB Share & Credential Protection
+
+- Avoid storing plaintext, encoded, or otherwise reversible credentials in shared folders.
+- Treat Base64 as an encoding mechanism rather than a security control.
+- Restrict access to sensitive SMB shares using least-privilege permissions.
+- Regularly audit shared folders for exposed credentials, scripts, configuration files, and backup material.
+
+### Privileged Account Management
+
+- Apply the principle of least privilege to backup and service accounts.
+- Prevent backup accounts from having replication or domain-level permissions unless strictly required.
+- Regularly review delegated Active Directory privileges and replication rights.
+- Separate administrative accounts from service and operational accounts.
+
+### NTLM & Lateral Movement Protection
+
+- Reduce NTLM usage where operationally possible and prefer modern authentication mechanisms.
+- Restrict remote administrative access to trusted management systems.
+- Use network segmentation and host-based firewall rules to limit lateral movement.
+- Monitor for suspicious Pass-the-Hash behavior and abnormal privileged authentication.
+
+### Monitoring & Detection
+
+- Monitor repeated Kerberos username enumeration and AS-REP requests.
+- Alert on unusual directory replication activity from non-Domain Controller systems or unexpected accounts.
+- Monitor privileged SMB access and unusual remote administrative sessions.
+- Review authentication logs for abnormal use of high-privilege accounts.
+
+
+
+---
+
+
+
+## Conclusion
+
+This lab demonstrated how multiple Active Directory weaknesses can be chained together to achieve full administrative access.
+
+The assessment progressed from service and user enumeration to AS-REP Roasting, credential recovery, SMB credential discovery, domain hash extraction, and finally Pass-the-Hash authentication as `Administrator`.
+
+## Lessons Learned
+
+This exercise reinforced the importance of combining enumeration, credential analysis, and privilege assessment rather than treating findings in isolation.
+
+It also highlighted how weak Kerberos configuration, exposed credentials, excessive privileges, and reusable NTLM hashes can turn individual issues into a complete domain compromise.
 
 
 
