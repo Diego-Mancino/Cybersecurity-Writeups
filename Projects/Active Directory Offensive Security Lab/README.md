@@ -255,11 +255,11 @@ This exposed NTLM hashes for domain accounts, including `Administrator`.
 
 **Impact:** Critical
 
-### 5. NTLM Hash Reuse Through Pass-the-Hash
+### 5. Administrative NTLM Credential Exposure Enabling Pass-the-Hash
 
-The extracted Administrator NTLM hash could be used directly for remote authentication without requiring the plaintext password.
+The Administrator NTLM hash was exposed through domain credential extraction and could be used directly for remote authentication without requiring the plaintext password.
 
-This resulted in successful administrative access to the Domain Controller.
+This enabled successful administrative access to the Domain Controller through a Pass-the-Hash technique.
 
 **Impact:** Critical
 
@@ -320,6 +320,21 @@ The attack chain could be significantly reduced through stronger identity, crede
 ---
 
 
+
+## MITRE ATT&CK Mapping
+
+| Activity | MITRE ATT&CK Technique |
+|---|---|
+| Account discovery / user enumeration | T1087 |
+| AS-REP Roasting | T1558.004 |
+| Credentials stored in files | T1552.001 |
+| SMB share discovery | T1135 |
+| Domain credential extraction via DRSUAPI | T1003.006 |
+| Pass-the-Hash | T1550.002 |
+
+
+
+---
 
 ## Conclusion
 
