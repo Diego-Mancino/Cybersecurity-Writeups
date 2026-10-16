@@ -21,6 +21,13 @@ An authorized, non-intrusive assessment of INTECSSA's public-facing web environm
 ➡️ [View Web Security Assessment](./Projects/Web-Security-Assessment-Lab/)
 
 
+### 🔹 Active Directory Offensive Security Lab
+Active Directory | Kerberos | AS-REP Roasting | SMB | DCSync | Pass-the-Hash | MITRE ATT&CK
+A full domain-compromise chain covering user enumeration, Kerberos pre-authentication abuse, credential recovery, SMB share analysis, domain credential extraction through DRSUAPI, and Pass-the-Hash authentication, including security findings, mitigations, and MITRE ATT&CK mapping.
+
+➡️ [View Active Directory Offensive Security Lab](./Projects/Active-Directory-Offensive-Security-Lab/)
+
+
 ### 🔹 Windows Server 2022 Hardening — Defensive Security Lab
 
 **Windows Server | Hardening | Microsoft Defender | Firewall | RDP | Security Auditing**
@@ -78,8 +85,6 @@ A Windows penetration testing scenario involving anonymous FTP access to an IIS 
 A focused web security lab demonstrating an Insecure Direct Object Reference (IDOR) vulnerability and how insufficient server-side authorization controls can allow unauthorized access to another user's resources.
 
 ➡️ [View IDOR Write-up](./PortSwigger/IDOR/)
-
-Currently expanding the portfolio with Active Directory and Windows domain security labs.
 
 
 ---
