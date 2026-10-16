@@ -25,7 +25,7 @@ An authorized, non-intrusive assessment of INTECSSA's public-facing web environm
 Active Directory | Kerberos | AS-REP Roasting | SMB | DCSync | Pass-the-Hash | MITRE ATT&CK
 A full domain-compromise chain covering user enumeration, Kerberos pre-authentication abuse, credential recovery, SMB share analysis, domain credential extraction through DRSUAPI, and Pass-the-Hash authentication, including security findings, mitigations, and MITRE ATT&CK mapping.
 
-➡️ [View Active Directory Offensive Security Lab](./Projects/Active-Directory-Offensive-Security-Lab/)
+➡️ [View Active Directory Offensive Security Lab](./Projects/Active Directory Offensive Security Lab/)
 
 
 ### 🔹 Windows Server 2022 Hardening — Defensive Security Lab
