@@ -320,18 +320,21 @@ The attack chain could be significantly reduced through stronger identity, crede
 ---
 
 
-
 ## MITRE ATT&CK Mapping
 
-| Activity | MITRE ATT&CK Technique |
-|---|---|
-| Account discovery / user enumeration | T1087 |
-| AS-REP Roasting | T1558.004 |
-| Credentials stored in files | T1552.001 |
-| SMB share discovery | T1135 |
-| Domain credential extraction via DRSUAPI | T1003.006 |
-| Pass-the-Hash | T1550.002 |
+The main activities performed during the lab were mapped to the MITRE ATT&CK framework to connect the technical attack chain with recognized adversary tactics and techniques.
 
+| Activity | MITRE ATT&CK Technique | Tactic | Lab Evidence |
+|---|---|---|---|
+| Network service discovery | T1046 - Network Service Discovery | Discovery | Nmap service and port enumeration |
+| Domain account discovery / user enumeration | T1087.002 - Domain Account | Discovery | Kerbrute user enumeration |
+| AS-REP Roasting | T1558.004 - AS-REP Roasting | Credential Access | GetNPUsers / AS-REP hash extraction |
+| Credentials stored in files | T1552.001 - Credentials In Files | Credential Access | Credentials recovered from an accessible SMB share |
+| SMB share discovery | T1135 - Network Share Discovery | Discovery | SMB share enumeration |
+| Domain credential extraction via DRSUAPI | T1003.006 - DCSync | Credential Access | secretsdump.py using DRSUAPI |
+| Pass-the-Hash authentication | T1550.002 - Pass the Hash | Lateral Movement | NTLM hash authentication using Evil-WinRM |
+
+> This mapping focuses on the most relevant actions in the attack chain rather than mapping every individual command executed during the lab.
 
 
 ---
