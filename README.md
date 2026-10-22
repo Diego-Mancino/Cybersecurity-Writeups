@@ -21,6 +21,16 @@ An authorized, non-intrusive assessment of INTECSSA's public-facing web environm
 ➡️ [View Web Security Assessment](./Projects/Web-Security-Assessment-Lab/)
 
 
+### 🔹 Windows Detection & Monitoring Lab — Wazuh, Sysmon & MITRE ATT&CK
+
+**SOC Operations | Security Monitoring | Windows Event Analysis | MITRE ATT&CK**
+
+Built an isolated Windows monitoring environment using Wazuh and Sysmon. Investigated six controlled security scenarios involving process execution, account activity, authentication failures, network connections, and privileged group modifications.
+
+Analyzed Windows Security and Sysmon telemetry, investigated Wazuh alerts, and validated MITRE ATT&CK mappings, including a level 12 alert triggered by an administrative group membership change.
+
+➡️ [View Windows Detection & Monitoring Lab](Projects/Windows-Detection-Monitoring-Lab/)
+
 ### 🔹 Active Directory Offensive Security Lab
 Active Directory | Kerberos | AS-REP Roasting | SMB | DCSync | Pass-the-Hash | MITRE ATT&CK
 A full domain-compromise chain covering user enumeration, Kerberos pre-authentication abuse, credential recovery, SMB share analysis, domain credential extraction through DRSUAPI, and Pass-the-Hash authentication, including security findings, mitigations, and MITRE ATT&CK mapping.
