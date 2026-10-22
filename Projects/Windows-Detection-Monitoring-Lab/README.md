@@ -34,7 +34,7 @@ The lab was built in VirtualBox using three isolated virtual machines connected 
 
 The systems communicate through the isolated `10.10.10.0/24` lab network.
 
-```text
+
                     CYBER-LAB
                   10.10.10.0/24
 
