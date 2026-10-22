@@ -47,7 +47,7 @@ The systems communicate through the isolated `10.10.10.0/24` lab network.
 
 
 
-
+```text
                     CYBER-LAB
                   10.10.10.0/24
 
@@ -69,7 +69,7 @@ The systems communicate through the isolated `10.10.10.0/24` lab network.
      | Wazuh Agent      |   | Controlled     |
      | Sysmon           |   | test activity  |
      +------------------+   +----------------+
-
+```
 
 
 The Windows endpoint forwards Windows Security and Sysmon telemetry to the Wazuh server for centralized analysis.
@@ -308,7 +308,7 @@ A new local user account named `LabUser` was created on the monitored Windows 10
 The following command was used:
 
 ```cmd
-net user LabUser Passw0rd-Lab-2026 /add
+net user LabUser [LAB-PASSWORD] /add
 ```
 
 The account was then verified with:
@@ -640,6 +640,8 @@ The alert represents a security-relevant privileged group membership change. Alt
 
 This scenario demonstrates the importance of reviewing detection rules, validating MITRE ATT&CK mappings, and interpreting alerts within their operational context rather than relying solely on automated classifications.
 
+
+- **Analyst Verdict:** True Positive — Authorized Lab Activity
 
 
 #### MITRE ATT&CK Mapping
