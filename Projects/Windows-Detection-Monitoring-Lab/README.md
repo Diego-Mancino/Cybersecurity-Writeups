@@ -1,5 +1,8 @@
 # Windows Detection & Monitoring Lab — Sysmon, Wazuh & MITRE ATT&CK
 
+
+
+
 ## Overview
 
 This project documents the deployment and use of a Windows detection and monitoring lab built with Sysmon, Wazuh, and MITRE ATT&CK.
@@ -7,6 +10,9 @@ This project documents the deployment and use of a Windows detection and monitor
 The lab was designed to collect Windows endpoint telemetry, centralize events in Wazuh, generate controlled security-relevant activity, and analyze how that activity is represented across Sysmon, Windows Security logs, and Wazuh.
 
 The environment includes a Windows 10 monitored endpoint, a Wazuh server hosted on Ubuntu, and a Kali Linux machine used to generate controlled network activity.
+
+
+
 
 ## Objectives
 
@@ -20,6 +26,8 @@ The environment includes a Windows 10 monitored endpoint, a Wazuh server hosted 
 - Document evidence, observations, and security implications for each detection scenario.
 
 
+
+
 ## Lab Architecture
 
 The lab was built in VirtualBox using three isolated virtual machines connected through an internal network named `CYBER-LAB`.
@@ -30,9 +38,14 @@ The lab was built in VirtualBox using three isolated virtual machines connected 
 | Windows 10 | Monitored endpoint | `10.10.10.20` | Wazuh Agent, Sysmon, Windows Security Logs |
 | Kali Linux | Controlled testing machine | `10.10.10.30` | Nmap and network testing tools |
 
+
+
+
 ### Network Design
 
 The systems communicate through the isolated `10.10.10.0/24` lab network.
+
+
 
 
                     CYBER-LAB
@@ -57,9 +70,14 @@ The systems communicate through the isolated `10.10.10.0/24` lab network.
      | Sysmon           |   | test activity  |
      +------------------+   +----------------+
 
+
+
 The Windows endpoint forwards Windows Security and Sysmon telemetry to the Wazuh server for centralized analysis.
 
 Kali Linux is used only to generate controlled network activity inside the isolated lab environment.
+
+
+---
 
 
 ## Tools & Technologies
@@ -71,6 +89,10 @@ Kali Linux is used only to generate controlled network activity inside the isola
 - **Nmap** — Network service discovery and port scanning.
 - **VirtualBox** — Virtualization platform used to host the isolated lab environment.
 - **MITRE ATT&CK** — Framework used to map observed behavior to relevant adversary tactics and techniques.
+
+
+---
+
 
 
 ## Environment Setup & Monitoring Pipeline
@@ -88,6 +110,9 @@ The resulting monitoring pipeline is:
 
 `Windows Activity → Windows Security / Sysmon → Wazuh Agent → Wazuh Manager → Wazuh Indexer → Wazuh Dashboard`
 
+
+
+
 ### Sysmon Configuration
 
 Sysmon was configured to collect the telemetry required for this lab while avoiding unnecessary event volume.
@@ -97,6 +122,9 @@ The main monitored event types were:
 - **Event ID 1** — Process Creation
 - **Event ID 3** — Network Connection
 - **DNS Query telemetry**
+
+
+
 
 ### Wazuh Event Collection
 
@@ -121,6 +149,8 @@ This distinction was important during the lab because some controlled activities
 
 ### 1. PowerShell Execution
 
+
+
 #### Activity
 
 PowerShell was executed on the monitored Windows 10 endpoint to generate process creation telemetry.
@@ -133,6 +163,7 @@ Get-Process | Select-Object -First 5
 Write-Output "CYBER-LAB-POWERSHELL-TEST"
 ```
 
+
 #### Sysmon Evidence
 
 Sysmon recorded the PowerShell execution as a **Process Create** event.
@@ -144,6 +175,9 @@ Relevant details included:
 - **Event Type:** Process Creation
 
 ![Sysmon PowerShell Process Creation](screenshots/02-sysmon-powershell-process-create.png)
+
+
+
 
 #### Wazuh Evidence
 
@@ -159,11 +193,15 @@ The event included information such as:
 
 ![Wazuh PowerShell Event](screenshots/03-wazuh-archives-powershell-event.png)
 
+
+
 #### MITRE ATT&CK Mapping
 
 - **Tactic:** Execution
 - **Technique:** `T1059` — Command and Scripting Interpreter
 - **Sub-technique:** `T1059.001` — PowerShell
+
+
 
 #### Observation
 
@@ -179,6 +217,9 @@ This demonstrates the difference between collecting telemetry and generating an 
 
 ### 2. Local Account Discovery
 
+
+
+
 #### Activity
 
 Local account enumeration was performed on the monitored Windows 10 endpoint to observe how account discovery activity is recorded by Sysmon and Wazuh.
@@ -189,6 +230,8 @@ The following commands were used:
 Get-LocalUser
 net user
 ```
+
+
 
 #### Sysmon Evidence
 
@@ -202,6 +245,9 @@ Relevant details included:
 - **Event Type:** Process Creation
 
 ![Sysmon Local Account Discovery](screenshots/04-sysmon-local-account-discovery-net-user.png)
+
+
+
 
 #### Wazuh Evidence
 
@@ -218,11 +264,17 @@ Relevant fields included:
 
 ![Wazuh Local Account Discovery](screenshots/05-wazuh-local-account-discovery-net-user.png)
 
+
+
+
 #### MITRE ATT&CK Mapping
 
 - **Tactic:** Discovery
 - **Technique:** `T1087` — Account Discovery
 - **Sub-technique:** `T1087.001` — Local Account
+
+
+
 
 #### Observation
 
@@ -237,6 +289,9 @@ Sysmon provided the process-level evidence, while Wazuh centralized the event fo
 
 
 ### 3. Local User Creation
+
+
+
 
 #### Activity
 
@@ -254,6 +309,9 @@ The account was then verified with:
 net user LabUser
 ```
 
+
+
+
 #### Sysmon Evidence
 
 Sysmon recorded the account creation activity as a **Process Create** event.
@@ -267,6 +325,9 @@ Relevant details included:
 
 ![Sysmon Local User Creation](screenshots/06-sysmon-local-user-creation.png)
 
+
+
+
 #### Windows Security Evidence
 
 Windows Security generated **Event ID 4720**, indicating that a new user account was created.
@@ -278,6 +339,9 @@ Relevant details included:
 - **Category:** User Account Management
 
 ![Windows Security Local User Created](screenshots/07-windows-security-local-user-created-4720.png)
+
+
+
 
 #### Wazuh Evidence
 
@@ -292,11 +356,17 @@ Relevant fields included:
 
 ![Wazuh Local User Creation](screenshots/08-wazuh-local-user-creation.png)
 
+
+
+
 #### MITRE ATT&CK Mapping
 
 - **Tactic:** Persistence
 - **Technique:** `T1136` — Create Account
 - **Sub-technique:** `T1136.001` — Local Account
+
+
+
 
 #### Observation
 
@@ -312,11 +382,17 @@ This type of activity is especially relevant because unauthorized local account 
 
 ### 4. Failed Logon Attempts
 
+
+
+
 #### Activity
 
 Several failed logon attempts were generated against the local `LabUser` account on the monitored Windows 10 endpoint.
 
 The objective was to observe how Windows records authentication failures and how those events are ingested by Wazuh for centralized analysis.
+
+
+
 
 #### Windows Security Evidence
 
@@ -336,6 +412,9 @@ Multiple consecutive failed logon events were recorded during the test.
 
 ![Windows Security Failed Logon](screenshots/09-windows-security-failed-logon-4625.png)
 
+
+
+
 #### Wazuh Evidence
 
 The failed authentication events were successfully ingested by Wazuh and were visible in the `wazuh-archives-*` index.
@@ -350,6 +429,9 @@ Relevant fields included:
 - Authentication Package: `Negotiate`
 
 ![Wazuh Failed Logon](screenshots/10-wazuh-failed-logon-labuser.png)
+
+
+
 
 #### Observation
 
@@ -366,6 +448,9 @@ In a production environment, repeated failed authentication events could be corr
 
 
 ### 5. Network Service Discovery
+
+
+
 
 #### Activity
 
@@ -387,6 +472,9 @@ The scan identified several exposed services on the Windows endpoint, including:
 
 ![Kali Nmap Network Service Discovery](screenshots/11-kali-nmap-network-service-discovery.png)
 
+
+
+
 #### Sysmon Evidence
 
 Sysmon recorded inbound network activity generated during the scan.
@@ -402,6 +490,9 @@ Relevant details included:
 - **Process:** `System`
 
 ![Sysmon Network Connection From Kali](screenshots/12-sysmon-network-connection-from-kali.png)
+
+
+
 
 #### Wazuh Evidence
 
@@ -419,10 +510,15 @@ Relevant fields included:
 
 ![Wazuh Network Connection From Kali](screenshots/13-wazuh-network-connection-from-kali.png)
 
+
+
+
 #### MITRE ATT&CK Mapping
 
 - **Tactic:** Discovery
 - **Technique:** `T1046` — Network Service Discovery
+
+
 
 #### Observation
 
@@ -442,6 +538,8 @@ This distinction is important because behavioral analysis and ATT&CK mapping oft
 
 ### 6. Privileged Group Modification
 
+
+
 #### Activity
 
 The local account `LabUser` was added to the local Administrators group on the monitored Windows 10 endpoint.
@@ -460,6 +558,8 @@ After validating the activity, the change was reverted with:
 net localgroup Administradores LabUser /delete
 ```
 
+
+
 #### Windows Security Evidence
 
 Windows Security generated **Event ID 4732**, which indicates that a member was added to a security-enabled local group.
@@ -474,6 +574,9 @@ Relevant details included:
 - **Action:** Member added to a local security-enabled group
 
 ![Windows Security Privileged Group Modification](screenshots/14-windows-security-privileged-group-4732.png)
+
+
+
 
 #### Wazuh Evidence
 
@@ -490,10 +593,16 @@ Relevant fields included:
 
 ![Wazuh Privileged Group Modification](screenshots/15-wazuh-privileged-group-modification.png)
 
+
+
+
 #### MITRE ATT&CK Mapping
 
 - **Tactic:** Persistence / Privilege Escalation
 - **Technique:** `T1098` — Account Manipulation
+
+
+
 
 #### Observation
 
@@ -513,6 +622,9 @@ In a production environment, unexpected modifications to privileged groups shoul
 
 The following table summarizes the MITRE ATT&CK techniques associated with the controlled activities performed during the lab.
 
+
+
+
 | # | Detection Scenario | MITRE ATT&CK | Tactic |
 |---|---|---|---|
 | 1 | PowerShell Execution | `T1059.001` — PowerShell | Execution |
@@ -521,6 +633,9 @@ The following table summarizes the MITRE ATT&CK techniques associated with the c
 | 4 | Failed Logon Attempts | Not mapped | Authentication Monitoring |
 | 5 | Network Service Discovery | `T1046` — Network Service Discovery | Discovery |
 | 6 | Privileged Group Modification | `T1098` — Account Manipulation | Persistence / Privilege Escalation |
+
+
+
 
 ### Mapping Considerations
 
@@ -561,6 +676,10 @@ Key takeaways from the project include:
 
 - **Centralized logging improves investigation efficiency.**  
   Wazuh made it possible to review endpoint telemetry from different sources within a single platform and correlate events more effectively.
+
+
+---
+
 
 ## Future Improvements
 
