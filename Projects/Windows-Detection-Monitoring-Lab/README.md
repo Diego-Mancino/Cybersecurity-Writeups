@@ -205,11 +205,15 @@ The event included information such as:
 
 #### Observation
 
-The activity generated endpoint telemetry that was successfully collected by Sysmon and forwarded to Wazuh.
+The activity demonstrated how PowerShell execution can be observed through endpoint process creation telemetry.
 
-The benign commands used in this test did not trigger a dedicated Wazuh alert, so the activity was analyzed through the raw events available in `wazuh-archives-*`.
+Sysmon Event ID `1` captured the execution of `powershell.exe`, while Wazuh successfully ingested the event for centralized analysis.
 
-This demonstrates the difference between collecting telemetry and generating an actual SIEM alert.
+The commands used during this test were benign and did not trigger a dedicated Wazuh alert.
+
+Although PowerShell is commonly associated with `T1059.001 — PowerShell`, its execution alone does not indicate malicious activity. Additional context such as command-line arguments, parent processes, encoded commands, network activity, or surrounding events would be required to determine whether the activity is suspicious.
+
+This scenario therefore demonstrates telemetry collection and ATT&CK behavioral mapping rather than detection of malicious PowerShell activity.
 
 
 ---
@@ -262,6 +266,8 @@ Relevant fields included:
 - Command Line: `C:\Windows\System32\net1 user`
 - Description: `Net Command`
 
+Windows may invoke `net1.exe` internally when processing commands executed through the `net` utility, which explains the process name observed in the Wazuh telemetry.
+
 ![Wazuh Local Account Discovery](screenshots/05-wazuh-local-account-discovery-net-user.png)
 
 
@@ -278,11 +284,13 @@ Relevant fields included:
 
 #### Observation
 
-The activity demonstrated how native Windows utilities can generate useful process telemetry for account discovery.
+The activity demonstrated how native Windows account enumeration can be identified through process creation telemetry.
 
-Although the command itself is legitimate, the same behavior can also appear during attacker reconnaissance after gaining access to a Windows system.
+Sysmon Event ID `1` captured the execution of the Windows `net` utility and its associated command line, while Wazuh centralized the event for investigation.
 
-Sysmon provided the process-level evidence, while Wazuh centralized the event for investigation and threat hunting.
+Although `net user` is a legitimate administrative command, the same behavior can be used during post-compromise discovery to identify local accounts available on a system.
+
+The security relevance of the event therefore depends on additional context such as the executing user, parent process, command line, timing, and surrounding activity.
 
 
 ---
@@ -320,8 +328,9 @@ Relevant details included:
 
 - **Event ID:** `1`
 - **Process:** `net1.exe`
-- **Command Line:** `C:\Windows\System32\net1 user LabUser Passw0rd-Lab-2026 /add`
-- **Event Type:** Process Creation
+- **Command Line:** `C:\Windows\System32\net1 user LabUser [LAB-PASSWORD] /add`
+
+Windows internally invoked `net1.exe` while processing the `net user` command executed during the test.
 
 ![Sysmon Local User Creation](screenshots/06-sysmon-local-user-creation.png)
 
@@ -522,15 +531,15 @@ Relevant fields included:
 
 #### Observation
 
-This scenario demonstrated how network reconnaissance activity can generate observable endpoint telemetry.
+This scenario demonstrated how network service discovery activity can leave observable network telemetry on the targeted endpoint.
 
-The Nmap scan originated from the Kali Linux system, while Sysmon recorded inbound network connections on the monitored Windows endpoint.
+The Nmap scan was intentionally generated from the Kali Linux system at `10.10.10.30`. Sysmon Event ID `3` recorded network connections received by the Windows endpoint, while Wazuh centralized the resulting telemetry for investigation.
 
-Wazuh then centralized the Sysmon telemetry, making it possible to correlate the source address, destination address, protocol, and destination port from a single monitoring interface.
+The individual Sysmon event shown in this lab represents supporting evidence of network activity rather than an automatic detection of a port scan.
 
-The MITRE ATT&CK mapping is based on the behavior performed during the controlled test. The raw Wazuh event itself was not automatically classified as `T1046`.
+The `T1046 — Network Service Discovery` mapping is based on the controlled behavior performed with Nmap. Identifying scanning behavior from telemetry alone would normally require correlation of multiple connection events, ports, hosts, timing, and other contextual indicators.
 
-This distinction is important because behavioral analysis and ATT&CK mapping often require analyst interpretation in addition to the telemetry collected by the SIEM.
+This distinction highlights the difference between collecting network telemetry and detecting a behavioral pattern.
 
 
 ---
@@ -600,7 +609,7 @@ Relevant fields included:
 
 - **Tactic:** Persistence / Privilege Escalation
 - **Technique:** `T1098` — Account Manipulation
-
+- **Sub-technique:** `T1098.007` — Additional Local or Domain Groups
 
 
 
@@ -632,8 +641,7 @@ The following table summarizes the MITRE ATT&CK techniques associated with the c
 | 3 | Local User Creation | `T1136.001` — Local Account | Persistence |
 | 4 | Failed Logon Attempts | Not mapped | Authentication Monitoring |
 | 5 | Network Service Discovery | `T1046` — Network Service Discovery | Discovery |
-| 6 | Privileged Group Modification | `T1098` — Account Manipulation | Persistence / Privilege Escalation |
-
+| 6 | Privileged Group Modification | `T1098.007` — Additional Local or Domain Groups | Persistence / Privilege Escalation |
 
 
 
@@ -641,11 +649,13 @@ The following table summarizes the MITRE ATT&CK techniques associated with the c
 
 MITRE ATT&CK mappings in this project are based on the behavior performed during each controlled scenario rather than assuming that every collected event represents malicious activity.
 
-For example, PowerShell, `net user`, and local group management commands are legitimate administrative tools. Their security relevance depends on the context in which they are executed.
+PowerShell, `net user`, and local group management commands are legitimate administrative tools. Their security relevance depends on the context in which they are executed.
 
 The failed logon scenario was intentionally not mapped to `T1110 — Brute Force`, because the test consisted of only a small number of manually generated authentication failures and did not reproduce an actual password-guessing attack.
 
-Similarly, the `T1046 — Network Service Discovery` mapping represents the behavior performed with Nmap during the controlled test. The raw Sysmon and Wazuh events provided the supporting telemetry, while the ATT&CK classification was based on analyst interpretation of the activity.
+The `T1046 — Network Service Discovery` mapping is based on the controlled Nmap activity performed during the lab. The individual Sysmon network events provide supporting telemetry, but do not independently identify or classify a port scan.
+
+Similarly, the `T1098.007 — Additional Local or Domain Groups` mapping reflects the addition of `LabUser` to the local `Administradores` group. Windows Security Event ID `4732` and the corresponding Wazuh event provide the supporting evidence for that behavior.
 
 This approach avoids over-classifying benign telemetry and reflects how MITRE ATT&CK can be used as an analytical framework rather than simply assigning techniques to every security event.
 
