@@ -603,6 +603,43 @@ Relevant fields included:
 ![Wazuh Privileged Group Modification](screenshots/15-wazuh-privileged-group-modification.png)
 
 
+#### Wazuh Alert Evidence
+
+Wazuh generated an alert for Windows Security Event ID `4732`, confirming that the controlled modification of the local Administrators group triggered a detection rule.
+
+**Alert Details:**
+
+- **Rule ID:** `60154`
+- **Rule Description:** `Administrators Group Changed`
+- **Rule Level:** `12`
+- **Windows Event ID:** `4732`
+- **Index:** `wazuh-alerts-*`
+- **Agent:** `Windows10-CyberLab`
+- **Target Group:** `Administradores`
+- **Event Channel:** `Security`
+
+![Wazuh alert for privileged group modification](screenshots/16-wazuh-alert-privileged-group-4732.png)
+
+#### Detection Rule & MITRE ATT&CK Analysis
+
+Wazuh triggered its predefined rule `60154`, which identifies changes involving the Administrators group.
+
+The rule automatically associated the event with `T1484 - Domain Policy Modification`.
+
+![Wazuh rule 60154 - Administrators Group Changed](screenshots/17-wazuh-rule-60154-alert-details.png)
+
+*Wazuh alert rule details showing Rule ID 60154, severity level 12, and the automatically assigned MITRE ATT&CK mapping T1484.*
+
+However, the controlled activity performed in this lab consisted of adding a local account to the Windows Administrators group, rather than modifying domain policy.
+
+Based on the observed behavior, `T1098.007 - Additional Local or Domain Groups` is a more precise MITRE ATT&CK mapping.
+
+**Analyst Assessment:**
+
+The alert represents a security-relevant privileged group membership change. Although Wazuh assigned a high alert level, the activity was authorized and performed in an isolated laboratory.
+
+This scenario demonstrates the importance of reviewing detection rules, validating MITRE ATT&CK mappings, and interpreting alerts within their operational context rather than relying solely on automated classifications.
+
 
 
 #### MITRE ATT&CK Mapping
@@ -622,6 +659,8 @@ Adding an account to the local Administrators group is a security-sensitive acti
 Windows Event ID `4732` provides valuable visibility into local group membership changes, including the affected group, the account responsible for the modification, and the member that was added.
 
 In a production environment, unexpected modifications to privileged groups should be investigated because they may indicate unauthorized privilege escalation or persistence activity.
+
+Unlike scenarios where only raw telemetry was available, this privileged group modification also generated a Wazuh alert, demonstrating the distinction between event collection and rule-based alert generation.
 
 
 ---
@@ -700,7 +739,7 @@ Possible improvements for future versions of the lab include:
 - Add PowerShell Script Block Logging for deeper PowerShell visibility.
 - Expand Sysmon coverage with a more advanced configuration.
 - Create detection logic for suspicious local account creation.
-- Monitor unexpected additions to privileged local groups.
+- Improve privileged group membership alert investigation with rule tuning, contextual analysis, and false-positive assessment.
 - Add dashboards focused on authentication, process creation, and network activity.
 - Extend the lab with additional Windows endpoints or Active Directory.
 - Introduce controlled attack simulations and compare the generated telemetry with MITRE ATT&CK techniques.
